@@ -62,7 +62,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    [self.scrollView addSubview:self.imageView];
     self.scrollView.minimumZoomScale = 0.2;
     self.scrollView.maximumZoomScale = 5.0;
     self.scrollView.delegate = self;

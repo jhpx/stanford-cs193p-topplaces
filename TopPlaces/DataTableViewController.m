@@ -15,8 +15,14 @@
 
 - (void)setItems:(NSArray *)items
 {
-    _items = items;
-    [self.tableView reloadData];
+    if(_items!=items)
+    {
+        _items = items;
+        if ([self respondsToSelector:@selector(setItemsHook)]){
+            [self performSelector:@selector(setItemsHook)];
+        }
+        [self.tableView reloadData];
+    }
 }
 
 - (void)awakeFromNib

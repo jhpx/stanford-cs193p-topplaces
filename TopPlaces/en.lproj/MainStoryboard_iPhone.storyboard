@@ -58,6 +58,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="Vmh-H4-OKj" kind="push" identifier="Show Photo" id="1cq-XF-VqU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -66,9 +69,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recent Photos" id="nm0-VS-Ewc"/>
-                    <connections>
-                        <segue destination="Vmh-H4-OKj" kind="push" identifier="Show Photo" id="yJO-BL-nWj"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wJ2-eT-OYf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -156,6 +156,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="Vmh-H4-OKj" kind="push" identifier="Show Photo" id="NeR-pd-krW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -164,9 +167,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Photos" id="HLc-wt-2jf"/>
-                    <connections>
-                        <segue destination="Vmh-H4-OKj" kind="push" identifier="Show Photo" id="lne-Vw-Ul0"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1z6-x6-McO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -263,6 +263,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lne-Vw-Ul0"/>
+        <segue reference="1cq-XF-VqU"/>
     </inferredMetricsTieBreakers>
 </document>
