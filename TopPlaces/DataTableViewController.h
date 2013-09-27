@@ -1,5 +1,5 @@
 //
-//  TopPlacesViewController.h
+//  DataTableViewController.h
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-24.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopPlacesViewController : UITableViewController
-@property (nonatomic, strong) NSArray *places;
+@interface DataTableViewController : UITableViewController
+@property (nonatomic, strong) NSArray *items;
 
 @end
