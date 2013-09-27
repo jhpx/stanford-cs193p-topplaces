@@ -32,10 +32,12 @@
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
-            if ([segue.identifier isEqualToString:@"List Place Photos"]) {
-//                NSDictionary *place = (self.items)[indexPath.row];
-//                NSArray* photos = [FlickrFetcher photosInPlace:place maxResults:20];
-//                [segue.destinationViewController setPhotos:photos];
+            if ([segue.identifier isEqualToString:@"Show Photo"]) {
+                if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
+                    NSURL *url = [FlickrFetcher urlForPhoto:self.items[indexPath.row] format:FlickrPhotoFormatLarge];
+                    [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:url];
+                    [segue.destinationViewController setTitle:[self titleForIndexPath:indexPath]];
+                }
             }
         }
     }
@@ -45,7 +47,13 @@
 - (NSString *)titleForIndexPath:(NSIndexPath*)indexPath
 {
     NSDictionary *photo = self.items[indexPath.row];
-    return photo[FLICKR_PHOTO_TITLE];
+    NSString *result = photo[FLICKR_PHOTO_TITLE];
+    if (!result) {
+        result = photo[FLICKR_PHOTO_DESCRIPTION];
+    }else if (!result) {
+        result = @"Unknown";
+    }
+    return result;
 }
 
 - (NSString *)subtitleForIndexPath:(NSIndexPath*)indexPath

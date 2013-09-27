@@ -1,0 +1,14 @@
+//
+//  ImageViewController.h
+//  TopPlaces
+//
+//  Created by 姜孟冯 on 13-9-27.
+//  Copyright (c) 2013年 姜孟冯. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface ImageViewController : UIViewController
+@property (nonatomic, strong) NSURL *imageURL;
+
+@end
