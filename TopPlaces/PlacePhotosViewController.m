@@ -15,29 +15,39 @@
 
 @implementation PlacePhotosViewController
 
-- (void) setItems:(NSArray *)items
-{
-    [super setItems:items];
-    for ( id p in self.items){
-        if ([p isKindOfClass:[NSDictionary class]]) {
-            NSLog(@"%@",p);
-        }
-        
-    }
-
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Photo"]) {
-                if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
-                    NSURL *url = [FlickrFetcher urlForPhoto:self.items[indexPath.row] format:FlickrPhotoFormatLarge];
+                if ([segue.destinationViewController respondsToSelector:@selector(setImageURL)]) {
+                    
+                    NSDictionary* placePhoto = self.items[indexPath.row];
+                    NSURL *url = [FlickrFetcher urlForPhoto:placePhoto format:FlickrPhotoFormatLarge];
                     [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:url];
                     [segue.destinationViewController setTitle:[self titleForIndexPath:indexPath]];
+                    
+                    
+                    // syncrosize
+                    
+                    
+//                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//                    
+//                    NSArray* defaultRecentPhotos = [defaults objectForKey:RECENT_PHOTOS_KEY];
+//                    NSMutableArray *newRecentPhotos = [[NSMutableArray alloc]initWithObjects: placePhoto, nil];
+//                    
+//                    
+//                    for (id photo in defaultRecentPhotos) {
+//                        if ([photo isKindOfClass:[NSDictionary class]] && ![photo[FLICKR_PHOTO_ID] isEqualToString:placePhoto[FLICKR_PHOTO_ID]]) {
+//                            [newRecentPhotos addObject:photo];
+//                        }
+//                    }
+//                    [defaults setObject:newRecentPhotos forKey:RECENT_PHOTOS_KEY];
+//                    [defaults synchronize];
+                    
                 }
+                
             }
         }
     }
@@ -66,5 +76,6 @@
 {
     return @"Flickr Photos";
 }
+
 
 @end

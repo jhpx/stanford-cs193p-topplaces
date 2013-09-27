@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
     
-    self.items = [FlickrFetcher topPlaces];    
+    self.items = [FlickrFetcher topPlaces];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -29,9 +29,12 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"List Place Photos"]) {
-                NSDictionary *place = (self.items)[indexPath.row];
-                NSArray* photos = [FlickrFetcher photosInPlace:place maxResults:20];
-                [segue.destinationViewController setItems:photos];
+                if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
+                    NSDictionary *place = (self.items)[indexPath.row];
+                    NSArray* photos = [FlickrFetcher photosInPlace:place maxResults:20];
+                    [segue.destinationViewController setItems:photos];
+                    [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
+                }
             }
         }
     }

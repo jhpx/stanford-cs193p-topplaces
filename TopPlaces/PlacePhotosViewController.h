@@ -9,6 +9,9 @@
 #import "DataTableViewController.h"
 #import "DataRepresent.h"
 
+
+#define RECENT_PHOTOS_KEY @"RecentPhotosViewController.RecentPhotos"
+
 @interface PlacePhotosViewController : DataTableViewController<DataRepresent>
 
 @end

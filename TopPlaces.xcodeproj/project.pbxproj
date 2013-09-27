@@ -10,6 +10,7 @@
 		5E71F52017F40FB8007DE635 /* PlacePhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71F51F17F40FB8007DE635 /* PlacePhotosViewController.m */; };
 		5E71F52717F51B5F007DE635 /* TopPlacesTVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71F52617F51B5F007DE635 /* TopPlacesTVCViewController.m */; };
 		5E71F52A17F53B07007DE635 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71F52917F53B06007DE635 /* ImageViewController.m */; };
+		5E97A65117F570C900142FFB /* RecentPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E97A65017F570C900142FFB /* RecentPhotosViewController.m */; };
 		5EC4F1DE17F16A130069C059 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC4F1DD17F16A130069C059 /* UIKit.framework */; };
 		5EC4F1E017F16A130069C059 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC4F1DF17F16A130069C059 /* Foundation.framework */; };
 		5EC4F1E217F16A130069C059 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC4F1E117F16A130069C059 /* CoreGraphics.framework */; };
@@ -33,6 +34,8 @@
 		5E71F52617F51B5F007DE635 /* TopPlacesTVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopPlacesTVCViewController.m; sourceTree = "<group>"; };
 		5E71F52817F53B06007DE635 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		5E71F52917F53B06007DE635 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		5E97A64F17F570C900142FFB /* RecentPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotosViewController.h; sourceTree = "<group>"; };
+		5E97A65017F570C900142FFB /* RecentPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotosViewController.m; sourceTree = "<group>"; };
 		5EC4F1DA17F16A130069C059 /* TopPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EC4F1DD17F16A130069C059 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5EC4F1DF17F16A130069C059 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -108,6 +111,8 @@
 				5E71F52617F51B5F007DE635 /* TopPlacesTVCViewController.m */,
 				5E71F51E17F40FB8007DE635 /* PlacePhotosViewController.h */,
 				5E71F51F17F40FB8007DE635 /* PlacePhotosViewController.m */,
+				5E97A64F17F570C900142FFB /* RecentPhotosViewController.h */,
+				5E97A65017F570C900142FFB /* RecentPhotosViewController.m */,
 				5E71F52817F53B06007DE635 /* ImageViewController.h */,
 				5E71F52917F53B06007DE635 /* ImageViewController.m */,
 				5EF6FE1517F2C0A700389944 /* FlickrFetcher */,
@@ -217,6 +222,7 @@
 				5E71F52017F40FB8007DE635 /* PlacePhotosViewController.m in Sources */,
 				5E71F52717F51B5F007DE635 /* TopPlacesTVCViewController.m in Sources */,
 				5E71F52A17F53B07007DE635 /* ImageViewController.m in Sources */,
+				5E97A65117F570C900142FFB /* RecentPhotosViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
