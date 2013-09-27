@@ -53,9 +53,9 @@
 {
     NSDictionary *photo = self.items[indexPath.row];
     NSString *result = photo[FLICKR_PHOTO_TITLE];
-    if (!result) {
+    if (![result length]) {
         result = photo[FLICKR_PHOTO_DESCRIPTION];
-    }else if (!result) {
+    }else if (![result length]) {
         result = @"Unknown";
     }
     return result;

@@ -18,8 +18,8 @@
     if(_items!=items)
     {
         _items = items;
-        if ([self respondsToSelector:@selector(setItemsHook)]){
-            [self performSelector:@selector(setItemsHook)];
+        if ([self respondsToSelector:@selector(setItemsHook:)]){
+            [self performSelector:@selector(setItemsHook:) withObject:items];
         }
         [self.tableView reloadData];
     }

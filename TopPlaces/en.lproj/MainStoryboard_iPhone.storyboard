@@ -6,11 +6,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller-->
         <scene sceneID="ahb-36-FMh">
             <objects>
                 <navigationController id="6OE-vV-DRv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="F2l-Vc-jQX"/>
+                    <tabBarItem key="tabBarItem" systemItem="topRated" id="F2l-Vc-jQX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="s1Y-Hc-jtB">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -216,11 +216,11 @@
             </objects>
             <point key="canvasLocation" x="1545" y="667"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller-->
         <scene sceneID="rlf-Fw-2tx">
             <objects>
                 <navigationController id="QP4-NI-YhC" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="vd2-fV-6MC"/>
+                    <tabBarItem key="tabBarItem" systemItem="recents" id="vd2-fV-6MC"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jBc-qC-0cp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

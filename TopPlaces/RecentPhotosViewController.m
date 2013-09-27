@@ -23,14 +23,28 @@
     return recent;
 }
 
--(void)setItems:(NSArray *)items
+-(void)setItemsHook:(NSArray*)items
 {
-    //do nothing, can't change these items by a given array.
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:items forKey:RECENT_PHOTOS_KEY];
+    [defaults synchronize];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[self.tableView reloadData];
+}
+
+
+// simply deletion
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSMutableArray * items = [self.items mutableCopy];
+        [items removeObject:(self.items)[indexPath.row]];
+        self.items = items;
+    }
 }
 
 @end

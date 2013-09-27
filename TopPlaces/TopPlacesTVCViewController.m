@@ -20,11 +20,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.items = [FlickrFetcher topPlaces];
+    for (NSDictionary *p in self.items)
+    {
+        NSLog(p);
+    }
 }
 
--(void)setItemsHook
+-(void)setItemsHook:(NSArray*)items
 {
     [self updatePlacesByCountry];
 }
