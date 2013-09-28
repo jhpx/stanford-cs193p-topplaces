@@ -1,17 +1,17 @@
 //
-//  RecentPhotosViewController.m
+//  RecentPhotosTVC.m
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-27.
 //  Copyright (c) 2013年 姜孟冯. All rights reserved.
 //
 
-#import "RecentPhotosViewController.h"
+#import "RecentPhotosTVC.h"
 
-@interface RecentPhotosViewController ()
+@interface RecentPhotosTVC ()
 @end
 
-@implementation RecentPhotosViewController
+@implementation RecentPhotosTVC
 
 
 -(NSArray *)items

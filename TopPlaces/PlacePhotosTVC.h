@@ -1,5 +1,5 @@
 //
-//  PlacePhotosViewController.h
+//  PlacePhotosTVC.h
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-26.
@@ -12,6 +12,6 @@
 
 #define RECENT_PHOTOS_KEY @"RecentPhotosViewController.RecentPhotos"
 
-@interface PlacePhotosViewController : DataTableViewController<DataRepresent>
+@interface PlacePhotosTVC : DataTableViewController<DataRepresent>
 
 @end

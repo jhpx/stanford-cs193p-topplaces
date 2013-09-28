@@ -1,21 +1,21 @@
 //
-//  TopPlacesTVCViewController.m
+//  TopPlacesTVC.m
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-27.
 //  Copyright (c) 2013年 姜孟冯. All rights reserved.
 //
 
-#import "TopPlacesTVCViewController.h"
+#import "TopPlacesTVC.h"
 #import "FlickrFetcher.h"
-#import "PlacePhotosViewController.h"
+#import "PlacePhotosTVC.h"
 
-@interface TopPlacesTVCViewController ()
+@interface TopPlacesTVC ()
 
 @property (nonatomic, strong) NSDictionary *placesByCountry;
 @end
 
-@implementation TopPlacesTVCViewController
+@implementation TopPlacesTVC
 
 - (void)viewDidLoad
 {
@@ -23,7 +23,7 @@
     self.items = [FlickrFetcher topPlaces];
     for (NSDictionary *p in self.items)
     {
-        NSLog(p);
+        NSLog(@"%@",p);
     }
 }
 

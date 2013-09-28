@@ -1,5 +1,5 @@
 //
-//  TopPlacesTVCViewController.h
+//  TopPlacesTVC.h
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-27.
@@ -9,7 +9,7 @@
 #import "DataTableViewController.h"
 #import "DataRepresent.h"
 
-@interface TopPlacesTVCViewController : DataTableViewController <DataRepresent>
+@interface TopPlacesTVC : DataTableViewController <DataRepresent>
 
 
 @end
