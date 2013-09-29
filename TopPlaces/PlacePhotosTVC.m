@@ -35,7 +35,7 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary* placePhoto = self.items[indexPath.row];
-    NSMutableArray *newRecentPhotos = [[NSMutableArray alloc]initWithObjects: placePhoto, nil];
+    NSMutableArray *newRecentPhotos = [NSMutableArray arrayWithObjects: placePhoto, nil];
     
     for (id photo in [defaults objectForKey:RECENT_PHOTOS_KEY]) {
         if ([photo isKindOfClass:[NSDictionary class]] && ![photo[FLICKR_PHOTO_ID] isEqualToString:placePhoto[FLICKR_PHOTO_ID]]) {

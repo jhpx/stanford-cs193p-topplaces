@@ -62,7 +62,7 @@
             if ([segue.identifier isEqualToString:@"List Place Photos"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
                     NSDictionary *place = [self placeByIndexPath:indexPath];
-                    NSArray* photos = [FlickrFetcher photosInPlace:place maxResults:20];
+                    NSArray* photos = [FlickrFetcher photosInPlace:place maxResults:50];
                     [segue.destinationViewController setItems:photos];
                     [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
                 }
