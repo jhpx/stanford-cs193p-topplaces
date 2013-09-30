@@ -71,6 +71,19 @@
     }
 }
 
+// 与按行segue同时执行
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//        if (indexPath) {
+//                if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
+//                    NSDictionary *place = [self placeByIndexPath:indexPath];
+//                    [segue.destinationViewController updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} callback:@selector(setItems:)];
+//                    [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
+//                }
+//            }
+//        }
+//}
+
 #pragma mark - UITableViewDataSource
 
 // 本地help方法，按section获取country

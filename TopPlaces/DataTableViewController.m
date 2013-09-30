@@ -20,7 +20,7 @@
         _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         _activityIndicator.color=[UIColor grayColor];
         _activityIndicator.hidesWhenStopped = YES;
-        _activityIndicator.center = self.tableView.center;
+        _activityIndicator.center = CGPointMake(160, 240);
         [_activityIndicator startAnimating];
     }
     return _activityIndicator;
