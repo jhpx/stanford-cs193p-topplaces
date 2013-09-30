@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation ImageViewController
@@ -20,6 +21,7 @@
 - (void)setImageURL:(NSURL *)imageURL
 {
     _imageURL = imageURL;
+    [self.activityIndicator startAnimating];
     [self updateByMethod:^{return [self reloadImage];} callback:@selector(resetScrollAndImageView:)];
 }
 
@@ -46,6 +48,7 @@
             self.scrollView.contentSize = CGSizeZero;
         }
     }
+    [self.activityIndicator stopAnimating];
 }
 
 // 载入页面后，重设定scrollView的最大最小Scale以及delegate

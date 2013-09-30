@@ -19,7 +19,7 @@
 // 载入页面后，异步获取Flickr上的topPlaces
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad];    
     [self updateByMethod:^(){return [FlickrFetcher topPlaces];} callback:@selector(setItems:)];
     //        for (NSDictionary *p in self.items)
     //        {
@@ -41,6 +41,7 @@
         [places addObject:place];
     }
     self.placesByCountry = placesByCountry;
+    [self.activityIndicator stopAnimating];
 }
 
 

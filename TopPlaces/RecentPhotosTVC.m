@@ -34,6 +34,7 @@
 // view出现前刷新
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.activityIndicator stopAnimating];
 	[self.tableView reloadData];
 }
 

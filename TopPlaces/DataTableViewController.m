@@ -13,6 +13,18 @@
 
 @implementation DataTableViewController
 
+- (UIActivityIndicatorView *)activityIndicator
+{
+    if (!_activityIndicator) {
+        _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        _activityIndicator.color=[UIColor grayColor];
+        _activityIndicator.hidesWhenStopped = YES;
+        _activityIndicator.center = self.tableView.center;
+        [_activityIndicator startAnimating];
+    }
+    return _activityIndicator;
+}
+
 // 预留一个setItemsHook函数，供子类在reloadData前对数据进行Hook处理
 - (void)setItems:(NSArray *)items
 {
@@ -24,6 +36,13 @@
         }
         [self.tableView reloadData];
     }
+}
+
+// 载入页面后，异步获取Flickr上的topPlaces
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self.tableView addSubview:self.activityIndicator];
 }
 
 - (void)awakeFromNib
@@ -56,7 +75,7 @@
     cell.detailTextLabel.text = [self performSelector:@selector(subtitleForIndexPath:) withObject:indexPath];
     return cell;
 }
-
+    
 // 异步刷新数据，以任意block方式在后台线程刷新，刷新完成后回主线程调用target的callback方法
 - (void) updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
 {

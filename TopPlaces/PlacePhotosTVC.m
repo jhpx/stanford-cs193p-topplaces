@@ -16,6 +16,13 @@
 
 @implementation PlacePhotosTVC
 
+// 在setItems时，将places按照国家分组，索引表保存至self.placesByCountry
+-(void)setItemsHook:(NSArray*)items
+{
+    [self.activityIndicator stopAnimating];
+}
+
+
 // 按行进行segue，异步获取Flickr上某一photo的实际image
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

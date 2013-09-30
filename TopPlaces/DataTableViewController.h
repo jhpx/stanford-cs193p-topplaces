@@ -10,6 +10,7 @@
 
 @interface DataTableViewController : UITableViewController
 @property (nonatomic, strong) NSArray *items;
+@property (nonatomic) UIActivityIndicatorView * activityIndicator;
 - (void) updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
 
 @end
