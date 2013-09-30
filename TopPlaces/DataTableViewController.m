@@ -13,6 +13,7 @@
 
 @implementation DataTableViewController
 
+// 延迟实例化activityIndicator，初始即开始转动
 - (UIActivityIndicatorView *)activityIndicator
 {
     if (!_activityIndicator) {

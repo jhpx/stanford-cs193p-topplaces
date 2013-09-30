@@ -16,7 +16,7 @@
 
 @implementation PlacePhotosTVC
 
-// 在setItems时，将places按照国家分组，索引表保存至self.placesByCountry
+// items载入完成，停转activityIndicator
 -(void)setItemsHook:(NSArray*)items
 {
     [self.activityIndicator stopAnimating];

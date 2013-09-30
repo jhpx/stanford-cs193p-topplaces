@@ -17,7 +17,7 @@
 
 @implementation ImageViewController
 
-// 当setImageURL时刷新图片
+// 当setImageURL时刷新图片,activityIndicator开始转动
 - (void)setImageURL:(NSURL *)imageURL
 {
     _imageURL = imageURL;
@@ -25,6 +25,7 @@
     [self updateByMethod:^{return [self reloadImage];} callback:@selector(resetScrollAndImageView:)];
 }
 
+// 按照imageURL刷新图片，重方法，需异步调用
 - (UIImage*)reloadImage
 {
     NSData *imageData = [NSData dataWithContentsOfURL:self.imageURL];
@@ -33,7 +34,7 @@
 }
 
 
-// 按照imageURL刷新图片，重置scrollView的contentSize与zoomScale
+// 重置scrollView的contentSize与zoomScale，停转activityIndicator
 - (void)resetScrollAndImageView:(UIImage*)image
 {
     self.scrollView.zoomScale = 1.0;
