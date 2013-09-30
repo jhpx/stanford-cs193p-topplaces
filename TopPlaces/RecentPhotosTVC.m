@@ -13,7 +13,7 @@
 
 @implementation RecentPhotosTVC
 
-
+// getItems时，默认载入NSUserDefaults的数据
 -(NSArray *)items
 {
     NSArray *recent = [super items];
@@ -23,6 +23,7 @@
     return recent;
 }
 
+// setItems时，同步保存新的items至NSUserDefaults
 -(void)setItemsHook:(NSArray*)items
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -30,14 +31,14 @@
     [defaults synchronize];
 }
 
+// view出现前刷新
 - (void)viewWillAppear:(BOOL)animated
 {
 	[self.tableView reloadData];
 }
 
 
-// simply deletion
-
+// 实现最近访问photo列表的删除功能
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {

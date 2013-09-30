@@ -8,6 +8,7 @@
 
 #import "PlacePhotosTVC.h"
 #import "FlickrFetcher.h"
+#import "ImageViewController.h"
 
 @interface PlacePhotosTVC ()
 
@@ -15,6 +16,7 @@
 
 @implementation PlacePhotosTVC
 
+// 按行进行segue，异步获取Flickr上某一photo的实际image
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([sender isKindOfClass:[UITableViewCell class]]) {
@@ -22,8 +24,7 @@
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Photo"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
-                    NSURL *url = [FlickrFetcher urlForPhoto:self.items[indexPath.row] format:FlickrPhotoFormatLarge];
-                    [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:url];
+                    [segue.destinationViewController updateByMethod:^{return [FlickrFetcher urlForPhoto:self.items[indexPath.row] format:FlickrPhotoFormatLarge];} callback:@selector(setImageURL:)];
                     [segue.destinationViewController setTitle:[self titleForIndexPath:indexPath]];
                 }
             }
@@ -31,6 +32,7 @@
     }
 }
 
+// 与按行segue同时执行，刷新并保存最新访问photos列表
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

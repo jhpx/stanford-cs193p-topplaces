@@ -8,7 +8,6 @@
 
 #import "TopPlacesTVC.h"
 #import "FlickrFetcher.h"
-#import "PlacePhotosTVC.h"
 
 @interface TopPlacesTVC ()
 
@@ -17,17 +16,18 @@
 
 @implementation TopPlacesTVC
 
+// 载入页面后，异步获取Flickr上的topPlaces
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.items = [FlickrFetcher topPlaces];
-    //    for (NSDictionary *p in self.items)
-    //    {
-    //        NSLog(@"%@",p);
-    //    }
+    [self updateByMethod:^(){return [FlickrFetcher topPlaces];} callback:@selector(setItems:)];
+    //        for (NSDictionary *p in self.items)
+    //        {
+    //            NSLog(@"%@",p);
+    //        }
 }
 
+// 在setItems时，将places按照国家分组，索引表保存至self.placesByCountry
 -(void)setItemsHook:(NSArray*)items
 {
     NSMutableDictionary *placesByCountry = [NSMutableDictionary dictionary];
@@ -44,7 +44,7 @@
 }
 
 
-
+// 本地help方法,按照indexPath获取place
 - (NSDictionary *)placeByIndexPath:(NSIndexPath*)indexPath
 {
     NSString *country = [self countryForSection:indexPath.section];
@@ -52,6 +52,7 @@
     return placesByCountry[indexPath.row];
 }
 
+// 按行进行segue，异步获取Flickr上某一place的photos
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([sender isKindOfClass:[UITableViewCell class]]) {
@@ -60,8 +61,7 @@
             if ([segue.identifier isEqualToString:@"List Place Photos"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
                     NSDictionary *place = [self placeByIndexPath:indexPath];
-                    NSArray* photos = [FlickrFetcher photosInPlace:place maxResults:50];
-                    [segue.destinationViewController setItems:photos];
+                    [segue.destinationViewController updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} callback:@selector(setItems:)];
                     [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
                 }
             }
@@ -71,6 +71,7 @@
 
 #pragma mark - UITableViewDataSource
 
+// 本地help方法，按section获取country
 - (NSString *)countryForSection:(NSInteger)section
 {
     return [self.placesByCountry allKeys][section];

@@ -10,5 +10,6 @@
 
 @interface DataTableViewController : UITableViewController
 @property (nonatomic, strong) NSArray *items;
+- (void) updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
 
 @end
