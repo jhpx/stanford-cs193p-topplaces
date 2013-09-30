@@ -57,7 +57,8 @@
     NSString *result = photo[FLICKR_PHOTO_TITLE];
     if (![result length]) {
         result = photo[FLICKR_PHOTO_DESCRIPTION];
-    }else if (![result length]) {
+    }
+    if (![result length]) {
         result = @"Unknown";
     }
     return result;

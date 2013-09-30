@@ -20,27 +20,31 @@
 - (void)setImageURL:(NSURL *)imageURL
 {
     _imageURL = imageURL;
-    [self resetImage];
+    [self updateByMethod:^{return [self reloadImage];} callback:@selector(resetScrollAndImageView:)];
 }
 
-// 按照imageURL刷新图片，重置scrollView的contentSize与zoomScale
-- (void)resetImage
+- (UIImage*)reloadImage
 {
-    
     NSData *imageData = [NSData dataWithContentsOfURL:self.imageURL];
-    UIImage *image = [UIImage imageWithData:imageData];
-    
-    
-    self.imageView.image = image;
+    NSLog(@"Fetching image from internet...");
+    return [UIImage imageWithData:imageData];
+}
+
+
+// 按照imageURL刷新图片，重置scrollView的contentSize与zoomScale
+- (void)resetScrollAndImageView:(UIImage*)image
+{
     self.scrollView.zoomScale = 1.0;
-    
-    if (image) {
-        self.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
-        self.scrollView.contentSize = image.size;
-    }
-    else {
-        self.imageView.frame = CGRectZero;
-        self.scrollView.contentSize = CGSizeZero;
+    if(self.imageView.image != image)
+    {self.imageView.image = image;
+        if (image) {
+            self.imageView.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+            self.scrollView.contentSize = image.size;
+        }
+        else {
+            self.imageView.frame = CGRectZero;
+            self.scrollView.contentSize = CGSizeZero;
+        }
     }
 }
 
@@ -52,7 +56,7 @@
     self.scrollView.minimumZoomScale = 0.2;
     self.scrollView.maximumZoomScale = 5.0;
     self.scrollView.delegate = self;
-    [self resetImage];
+    [self resetScrollAndImageView:self.imageView.image];
 }
 
 // 异步刷新数据，以任意block方式在后台线程刷新，刷新完成后回主线程调用target的callback方法
