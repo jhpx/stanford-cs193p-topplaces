@@ -43,7 +43,7 @@
         }
     }
     [defaults setObject:newRecentPhotos forKey:RECENT_PHOTOS_KEY];
-    [defaults synchronize];    
+    [defaults synchronize];
 }
 
 

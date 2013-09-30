@@ -20,22 +20,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.items = [FlickrFetcher topPlaces];
-    for (NSDictionary *p in self.items)
-    {
-        NSLog(@"%@",p);
-    }
+    //    for (NSDictionary *p in self.items)
+    //    {
+    //        NSLog(@"%@",p);
+    //    }
 }
 
 -(void)setItemsHook:(NSArray*)items
 {
-    [self updatePlacesByCountry];
-}
-
-- (void)updatePlacesByCountry
-{
     NSMutableDictionary *placesByCountry = [NSMutableDictionary dictionary];
-    for (NSDictionary *place in self.items) {
+    for (NSDictionary *place in items) {
         NSString *country = [[place[FLICKR_PLACE_NAME] componentsSeparatedByString:@", "] lastObject];
         NSMutableArray *places = placesByCountry[country];
         if (!places) {
@@ -46,6 +42,8 @@
     }
     self.placesByCountry = placesByCountry;
 }
+
+
 
 - (NSDictionary *)placeByIndexPath:(NSIndexPath*)indexPath
 {
