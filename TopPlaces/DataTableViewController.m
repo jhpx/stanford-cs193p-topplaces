@@ -40,17 +40,17 @@
             [self performSelector:@selector(setItemsHook:) withObject:items];
         }
 
-        for (NSDictionary *p in _items)
-        {
-            NSLog(@"%@",p);
-        }
+//        for (NSDictionary *p in _items)
+//        {
+//            NSLog(@"%@",p);
+//        }
         [self updateSplitViewDetail];
         [self.activityIndicator stopAnimating];
         [self.tableView reloadData];
     }
 }
 
-// 载入页面后，异步获取Flickr上的topPlaces
+// 载入页面后，加载activityIndicator，开始旋转
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -100,7 +100,7 @@
 {
     dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
     dispatch_async(downloadQueue, ^{
-//        id something = [NSArray arrayWithObject:updateMethod()[0]];
+//        id something = @[updateMethod()[0]];
         id something = updateMethod();
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([self respondsToSelector:callback]) {
@@ -148,7 +148,6 @@
         return nil;
     }
 }
-
 
 
 #pragma mark - DataRepresent
