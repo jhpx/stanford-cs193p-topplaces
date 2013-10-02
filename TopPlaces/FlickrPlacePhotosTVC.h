@@ -7,11 +7,10 @@
 //
 
 #import "DataTableViewController.h"
-#import "DataRepresent.h"
 
 
 #define RECENT_PHOTOS_KEY @"RecentPhotosViewController.RecentPhotos"
 
-@interface FlickrPlacePhotosTVC : DataTableViewController<DataRepresent>
+@interface FlickrPlacePhotosTVC : DataTableViewController
 
 @end

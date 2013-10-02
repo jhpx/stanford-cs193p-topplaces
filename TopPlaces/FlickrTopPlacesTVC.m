@@ -21,10 +21,7 @@
 {
     [super viewDidLoad];    
     [self updateByMethod:^(){return [FlickrFetcher topPlaces];} callback:@selector(setItems:)];
-            for (NSDictionary *p in self.items)
-            {
-                NSLog(@"%@",p);
-            }
+
 }
 
 // 在setItems时，将places按照国家分组，索引表保存至self.placesByCountry
@@ -42,7 +39,6 @@
         [places addObject:place];
     }
     self.placesByCountry = placesByCountry;
-    [self.activityIndicator stopAnimating];
 }
 
 

@@ -16,13 +16,6 @@
 
 @implementation FlickrPlacePhotosTVC
 
-// items载入完成，停转activityIndicator
--(void)setItemsHook:(NSArray*)items
-{
-    [self.activityIndicator stopAnimating];
-}
-
-
 // 按行进行segue，异步获取Flickr上某一photo的实际image
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -95,4 +88,11 @@
     coordinate.longitude = [photo[FLICKR_LONGITUDE] doubleValue];
     return coordinate;
 }
+
+- (UIImage*)thumbImageForItem:(NSDictionary*)photo{
+    NSURL *url = [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatSquare];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    return data ? [UIImage imageWithData:data] : nil;
+}
+
 @end

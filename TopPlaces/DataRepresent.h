@@ -17,4 +17,5 @@
 - (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath;
 @optional
 - (CLLocationCoordinate2D)coordinateForItem:(NSDictionary*)item;
+- (UIImage*)thumbImageForItem:(NSDictionary*)item;
 @end

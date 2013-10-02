@@ -7,9 +7,10 @@
 //
 
 #import "DataTableViewController.h"
-#import "DataRepresent.h"
+#import "MapViewController.h"
+#import "ItemAnnotation.h"
 
-@interface DataTableViewController ()
+@interface DataTableViewController () <MapViewControllerDelegate>
 @end
 
 @implementation DataTableViewController
@@ -28,6 +29,8 @@
 }
 
 // 预留一个setItemsHook函数，供子类在reloadData前对数据进行Hook处理
+// items载入完成，停转activityIndicator,刷新splitViewDetail
+
 - (void)setItems:(NSArray *)items
 {
     if(_items!=items)
@@ -36,6 +39,13 @@
         if ([self respondsToSelector:@selector(setItemsHook:)]){
             [self performSelector:@selector(setItemsHook:) withObject:items];
         }
+
+        for (NSDictionary *p in _items)
+        {
+            NSLog(@"%@",p);
+        }
+        [self updateSplitViewDetail];
+        [self.activityIndicator stopAnimating];
         [self.tableView reloadData];
     }
 }
@@ -63,7 +73,7 @@
 //- (NSString *)titleForItem:(NSDictionary*)item;
 //- (NSString *)subtitleForItem:(NSDictionary*)item;
 //- (NSString *)cellIdentifier;
-
+//- (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self conformsToProtocol:@protocol(DataRepresent)]) {
@@ -90,6 +100,7 @@
 {
     dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
     dispatch_async(downloadQueue, ^{
+//        id something = [NSArray arrayWithObject:updateMethod()[0]];
         id something = updateMethod();
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([self respondsToSelector:callback]) {
@@ -102,4 +113,64 @@
     });
 }
 
+- (NSArray *)mapAnnotations
+{
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:[self.items count]];
+    for (NSDictionary *item in self.items) {
+        ItemAnnotation *ia = [ItemAnnotation annotationForItem:item];
+        ia.delegate = self;
+        [annotations addObject:ia];
+    }
+    return annotations;
+}
+
+- (void)updateSplitViewDetail
+{
+    id detail = [self.splitViewController.viewControllers lastObject];
+    if ([detail isKindOfClass:[MapViewController class]]) {
+        MapViewController *mapVC = (MapViewController *)detail;
+        mapVC.delegate = self;
+        mapVC.annotations = [self mapAnnotations];
+    }
+}
+
+#pragma mark - MapViewControllerDelegate
+
+// 调用了一个指定方法，均在DataRepresent.h协议中给出，子类须实现此协议。
+//- (UIImage*)thumbImageForItem:(NSDictionary*)item;
+- (UIImage *)mapViewController:(MapViewController *)sender imageForAnnotation:(id <MKAnnotation>)annotation
+{
+    ItemAnnotation *ia = (ItemAnnotation *)annotation;
+    if([self respondsToSelector:@selector(thumbImageForItem:)]) {
+        return [self performSelector:@selector(thumbImageForItem:) withObject:ia.item];
+    }
+    else {
+        return nil;
+    }
+}
+
+
+
+#pragma mark - DataRepresent
+// 默认返回nil，子类必须覆盖
+
+- (NSString *)titleForItem:(NSDictionary*)item
+{
+    return nil;
+}
+
+- (NSString *)subtitleForItem:(NSDictionary*)item
+{
+    return nil;
+}
+
+- (NSString *)cellIdentifier
+{
+    return nil;
+}
+
+- (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath
+{
+    return nil;
+}
 @end
