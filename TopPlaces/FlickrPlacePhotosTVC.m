@@ -6,15 +6,15 @@
 //  Copyright (c) 2013年 姜孟冯. All rights reserved.
 //
 
-#import "PlacePhotosTVC.h"
+#import "FlickrPlacePhotosTVC.h"
 #import "FlickrFetcher.h"
 #import "ImageViewController.h"
 
-@interface PlacePhotosTVC ()
+@interface FlickrPlacePhotosTVC ()
 
 @end
 
-@implementation PlacePhotosTVC
+@implementation FlickrPlacePhotosTVC
 
 // items载入完成，停转activityIndicator
 -(void)setItemsHook:(NSArray*)items
@@ -31,8 +31,9 @@
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Photo"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
-                    [segue.destinationViewController updateByMethod:^{return [FlickrFetcher urlForPhoto:self.items[indexPath.row] format:FlickrPhotoFormatLarge];} callback:@selector(setImageURL:)];
-                    [segue.destinationViewController setTitle:[self titleForIndexPath:indexPath]];
+                    NSDictionary* photo = [self itemByIndexPath: indexPath];
+                    [segue.destinationViewController updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} callback:@selector(setImageURL:)];
+                    [segue.destinationViewController setTitle:[self titleForItem:photo]];
                 }
             }
         }
@@ -58,9 +59,9 @@
 
 #pragma mark - DataRepresent
 
-- (NSString *)titleForIndexPath:(NSIndexPath*)indexPath
+- (NSString *)titleForItem:(NSDictionary *)photo
 {
-    NSDictionary *photo = self.items[indexPath.row];
+    
     NSString *result = photo[FLICKR_PHOTO_TITLE];
     if (![result length]) {
         result = photo[FLICKR_PHOTO_DESCRIPTION];
@@ -71,9 +72,9 @@
     return result;
 }
 
-- (NSString *)subtitleForIndexPath:(NSIndexPath*)indexPath
+- (NSString *)subtitleForItem:(NSDictionary *)photo
 {
-    NSDictionary *photo = self.items[indexPath.row];
+    
     return photo[FLICKR_PHOTO_DESCRIPTION];
 }
 
@@ -82,5 +83,8 @@
     return @"Flickr Photos";
 }
 
-
+- (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath
+{
+    return self.items[indexPath.row];
+}
 @end

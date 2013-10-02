@@ -12,6 +12,6 @@
 
 #define RECENT_PHOTOS_KEY @"RecentPhotosViewController.RecentPhotos"
 
-@interface PlacePhotosTVC : DataTableViewController<DataRepresent>
+@interface FlickrPlacePhotosTVC : DataTableViewController<DataRepresent>
 
 @end

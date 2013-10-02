@@ -7,6 +7,7 @@
 //
 
 #import "DataTableViewController.h"
+#import "DataRepresent.h"
 
 @interface DataTableViewController ()
 @end
@@ -59,24 +60,31 @@
 }
 
 // 调用了三个指定方法，均在DataRepresent.h协议中给出，子类必须实现此协议。
-//- (NSString *)titleForIndexPath:(NSIndexPath*)indexPath;
-//- (NSString *)subtitleForIndexPath:(NSIndexPath*)indexPath;
+//- (NSString *)titleForItem:(NSDictionary*)item;
+//- (NSString *)subtitleForItem:(NSDictionary*)item;
 //- (NSString *)cellIdentifier;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [self performSelector:@selector(cellIdentifier) ];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    if ([self conformsToProtocol:@protocol(DataRepresent)]) {
+        NSString *CellIdentifier = [self performSelector:@selector(cellIdentifier) ];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        
+        // Configure the cell...
+        NSDictionary *item = [self performSelector:@selector(itemByIndexPath:) withObject:indexPath];
+        cell.textLabel.text = [self performSelector:@selector(titleForItem:)  withObject:item];
+        cell.detailTextLabel.text = [self performSelector:@selector(subtitleForItem:) withObject:item];
+        return cell;
+    }
+    else{
+        return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
     }
     
-    // Configure the cell...
-    cell.textLabel.text = [self performSelector:@selector(titleForIndexPath:)  withObject:indexPath];
-    cell.detailTextLabel.text = [self performSelector:@selector(subtitleForIndexPath:) withObject:indexPath];
-    return cell;
 }
-    
+
 // 异步刷新数据，以任意block方式在后台线程刷新，刷新完成后回主线程调用target的callback方法
 - (void) updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
 {

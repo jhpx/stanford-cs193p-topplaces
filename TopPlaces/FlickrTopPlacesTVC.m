@@ -6,25 +6,25 @@
 //  Copyright (c) 2013年 姜孟冯. All rights reserved.
 //
 
-#import "TopPlacesTVC.h"
+#import "FlickrTopPlacesTVC.h"
 #import "FlickrFetcher.h"
 
-@interface TopPlacesTVC ()
+@interface FlickrTopPlacesTVC ()
 
 @property (nonatomic, strong) NSDictionary *placesByCountry;
 @end
 
-@implementation TopPlacesTVC
+@implementation FlickrTopPlacesTVC
 
 // 载入页面后，异步获取Flickr上的topPlaces
 - (void)viewDidLoad
 {
     [super viewDidLoad];    
     [self updateByMethod:^(){return [FlickrFetcher topPlaces];} callback:@selector(setItems:)];
-    //        for (NSDictionary *p in self.items)
-    //        {
-    //            NSLog(@"%@",p);
-    //        }
+            for (NSDictionary *p in self.items)
+            {
+                NSLog(@"%@",p);
+            }
 }
 
 // 在setItems时，将places按照国家分组，索引表保存至self.placesByCountry
@@ -46,14 +46,6 @@
 }
 
 
-// 本地help方法,按照indexPath获取place
-- (NSDictionary *)placeByIndexPath:(NSIndexPath*)indexPath
-{
-    NSString *country = [self countryForSection:indexPath.section];
-    NSArray *placesByCountry = (self.placesByCountry)[country];
-    return placesByCountry[indexPath.row];
-}
-
 // 按行进行segue，异步获取Flickr上某一place的photos
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -62,7 +54,7 @@
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"List Place Photos"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
-                    NSDictionary *place = [self placeByIndexPath:indexPath];
+                    NSDictionary *place = [self itemByIndexPath:indexPath];
                     [segue.destinationViewController updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} callback:@selector(setItems:)];
                     [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
                 }
@@ -112,15 +104,13 @@
 
 #pragma mark - DataRepresent
 
-- (NSString *)titleForIndexPath:(NSIndexPath*)indexPath
+- (NSString *)titleForItem:(NSDictionary *)place
 {
-    NSDictionary *place = [self placeByIndexPath:indexPath];
     return place[FLICKR_PLACE_WOE];
 }
 
-- (NSString *)subtitleForIndexPath:(NSIndexPath*)indexPath
+- (NSString *)subtitleForItem:(NSDictionary *)place
 {
-    NSDictionary *place = [self placeByIndexPath:indexPath];
     return [place[FLICKR_PLACE_NAME] substringFromIndex:[place[FLICKR_PLACE_WOE] length]+1];
 }
 
@@ -129,5 +119,11 @@
     return @"Flickr Top Places";
 }
 
+- (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath
+{
+    NSString *country = [self countryForSection:indexPath.section];
+    NSArray *placesByCountry = (self.placesByCountry)[country];
+    return placesByCountry[indexPath.row];
+}
 
 @end
