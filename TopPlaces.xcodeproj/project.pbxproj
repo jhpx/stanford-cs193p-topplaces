@@ -11,8 +11,9 @@
 		5E71F52717F51B5F007DE635 /* FlickrTopPlacesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71F52617F51B5F007DE635 /* FlickrTopPlacesTVC.m */; };
 		5E71F52A17F53B07007DE635 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71F52917F53B06007DE635 /* ImageViewController.m */; };
 		5E97A65117F570C900142FFB /* RecentPhotosTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E97A65017F570C900142FFB /* RecentPhotosTVC.m */; };
-		5E987D1317FBC919008CAC37 /* FlickrPlaceAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E987D1217FBC919008CAC37 /* FlickrPlaceAnnotation.m */; };
-		5E987D1617FBC94B008CAC37 /* FlickrPhotoAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E987D1517FBC94B008CAC37 /* FlickrPhotoAnnotation.m */; };
+		5E987D1617FBC94B008CAC37 /* ItemAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E987D1517FBC94B008CAC37 /* ItemAnnotation.m */; };
+		5E987D1917FBD3BA008CAC37 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E987D1817FBD3BA008CAC37 /* CoreLocation.framework */; };
+		5E987D1B17FBD3C4008CAC37 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E987D1A17FBD3C4008CAC37 /* MapKit.framework */; };
 		5EC4F1DE17F16A130069C059 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC4F1DD17F16A130069C059 /* UIKit.framework */; };
 		5EC4F1E017F16A130069C059 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC4F1DF17F16A130069C059 /* Foundation.framework */; };
 		5EC4F1E217F16A130069C059 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EC4F1E117F16A130069C059 /* CoreGraphics.framework */; };
@@ -38,10 +39,10 @@
 		5E71F52917F53B06007DE635 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
 		5E97A64F17F570C900142FFB /* RecentPhotosTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotosTVC.h; sourceTree = "<group>"; };
 		5E97A65017F570C900142FFB /* RecentPhotosTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotosTVC.m; sourceTree = "<group>"; };
-		5E987D1117FBC919008CAC37 /* FlickrPlaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPlaceAnnotation.h; sourceTree = "<group>"; };
-		5E987D1217FBC919008CAC37 /* FlickrPlaceAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPlaceAnnotation.m; sourceTree = "<group>"; };
-		5E987D1417FBC94B008CAC37 /* FlickrPhotoAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotoAnnotation.h; sourceTree = "<group>"; };
-		5E987D1517FBC94B008CAC37 /* FlickrPhotoAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotoAnnotation.m; sourceTree = "<group>"; };
+		5E987D1417FBC94B008CAC37 /* ItemAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemAnnotation.h; sourceTree = "<group>"; };
+		5E987D1517FBC94B008CAC37 /* ItemAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemAnnotation.m; sourceTree = "<group>"; };
+		5E987D1817FBD3BA008CAC37 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5E987D1A17FBD3C4008CAC37 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		5EC4F1DA17F16A130069C059 /* TopPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EC4F1DD17F16A130069C059 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5EC4F1DF17F16A130069C059 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -69,9 +70,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EC4F1DE17F16A130069C059 /* UIKit.framework in Frameworks */,
-				5EC4F1E017F16A130069C059 /* Foundation.framework in Frameworks */,
 				5EC4F1E217F16A130069C059 /* CoreGraphics.framework in Frameworks */,
+				5E987D1917FBD3BA008CAC37 /* CoreLocation.framework in Frameworks */,
+				5EC4F1E017F16A130069C059 /* Foundation.framework in Frameworks */,
+				5E987D1B17FBD3C4008CAC37 /* MapKit.framework in Frameworks */,
+				5EC4F1DE17F16A130069C059 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,10 +84,8 @@
 		5E987D1717FBCA19008CAC37 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				5E987D1417FBC94B008CAC37 /* FlickrPhotoAnnotation.h */,
-				5E987D1517FBC94B008CAC37 /* FlickrPhotoAnnotation.m */,
-				5E987D1117FBC919008CAC37 /* FlickrPlaceAnnotation.h */,
-				5E987D1217FBC919008CAC37 /* FlickrPlaceAnnotation.m */,
+				5E987D1417FBC94B008CAC37 /* ItemAnnotation.h */,
+				5E987D1517FBC94B008CAC37 /* ItemAnnotation.m */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -109,9 +110,11 @@
 		5EC4F1DC17F16A130069C059 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5EC4F1DD17F16A130069C059 /* UIKit.framework */,
-				5EC4F1DF17F16A130069C059 /* Foundation.framework */,
 				5EC4F1E117F16A130069C059 /* CoreGraphics.framework */,
+				5E987D1817FBD3BA008CAC37 /* CoreLocation.framework */,
+				5EC4F1DF17F16A130069C059 /* Foundation.framework */,
+				5E987D1A17FBD3C4008CAC37 /* MapKit.framework */,
+				5EC4F1DD17F16A130069C059 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -241,8 +244,7 @@
 				5E71F52717F51B5F007DE635 /* FlickrTopPlacesTVC.m in Sources */,
 				5E71F52A17F53B07007DE635 /* ImageViewController.m in Sources */,
 				5E97A65117F570C900142FFB /* RecentPhotosTVC.m in Sources */,
-				5E987D1317FBC919008CAC37 /* FlickrPlaceAnnotation.m in Sources */,
-				5E987D1617FBC94B008CAC37 /* FlickrPhotoAnnotation.m in Sources */,
+				5E987D1617FBC94B008CAC37 /* ItemAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

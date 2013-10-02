@@ -126,4 +126,12 @@
     return placesByCountry[indexPath.row];
 }
 
+- (CLLocationCoordinate2D)coordinateForItem:(NSDictionary*)place
+{
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude = [place[FLICKR_LATITUDE] doubleValue];
+    coordinate.longitude = [place[FLICKR_LONGITUDE] doubleValue];
+    return coordinate;
+}
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
 @protocol DataRepresent <NSObject>
 @required
@@ -14,4 +15,6 @@
 - (NSString *)subtitleForItem:(NSDictionary*)item;
 - (NSString *)cellIdentifier;
 - (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath;
+@optional
+- (CLLocationCoordinate2D)coordinateForItem:(NSDictionary*)item;
 @end

@@ -87,4 +87,12 @@
 {
     return self.items[indexPath.row];
 }
+
+- (CLLocationCoordinate2D)coordinateForItem:(NSDictionary*)photo
+{
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude = [photo[FLICKR_LATITUDE] doubleValue];
+    coordinate.longitude = [photo[FLICKR_LONGITUDE] doubleValue];
+    return coordinate;
+}
 @end
