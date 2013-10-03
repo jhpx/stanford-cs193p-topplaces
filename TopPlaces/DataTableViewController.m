@@ -39,12 +39,14 @@
         if ([self respondsToSelector:@selector(setItemsHook:)]){
             [self performSelector:@selector(setItemsHook:) withObject:items];
         }
-
-//        for (NSDictionary *p in _items)
-//        {
-//            NSLog(@"%@",p);
-//        }
-        [self updateSplitViewDetail];
+        
+        //        for (NSDictionary *p in _items)
+        //        {
+        //            NSLog(@"%@",p);
+        //        }
+        
+        [self updateMapViewController:[self.splitViewController.viewControllers lastObject]]; //for ipad
+        
         [self.activityIndicator stopAnimating];
         [self.tableView reloadData];
     }
@@ -96,11 +98,11 @@
 }
 
 // 异步刷新数据，以任意block方式在后台线程刷新，刷新完成后回主线程调用target的callback方法
-- (void) updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
+- (void)updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
 {
     dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
     dispatch_async(downloadQueue, ^{
-//        id something = @[updateMethod()[0]];
+        //        id something = @[updateMethod()[0]];
         id something = updateMethod();
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([self respondsToSelector:callback]) {
@@ -124,11 +126,10 @@
     return annotations;
 }
 
-- (void)updateSplitViewDetail
+- (void)updateMapViewController:(UIViewController*)controller
 {
-    id detail = [self.splitViewController.viewControllers lastObject];
-    if ([detail isKindOfClass:[MapViewController class]]) {
-        MapViewController *mapVC = (MapViewController *)detail;
+    if ([controller isKindOfClass:[MapViewController class]]) {
+        MapViewController *mapVC = (MapViewController *)controller;
         mapVC.delegate = self;
         mapVC.annotations = [self mapAnnotations];
     }

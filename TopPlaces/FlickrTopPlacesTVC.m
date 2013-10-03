@@ -57,6 +57,13 @@
             }
         }
     }
+    else if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+            if ([segue.identifier isEqualToString:@"Show Map"]) {
+                [self updateMapViewController:segue.destinationViewController];
+            }
+        
+    }
+
 }
 
 // 与按行segue同时执行
