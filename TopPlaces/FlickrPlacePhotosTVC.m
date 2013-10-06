@@ -1,5 +1,5 @@
 //
-//  PlacePhotosTVC.m
+//  FlickrPlacePhotosTVC.m
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-26.

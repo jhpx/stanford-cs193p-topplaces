@@ -1,5 +1,5 @@
 //
-//  TopPlacesTVC.m
+//  FlickrTopPlacesTVC.m
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-27.
@@ -17,7 +17,6 @@
 @implementation FlickrTopPlacesTVC
 
 // 在setItems时，将places按照国家分组，索引表保存至self.placesByCountry
-// items载入完成，停转activityIndicator
 -(void)setItemsHook:(NSArray*)items
 {
     NSMutableDictionary *placesByCountry = [NSMutableDictionary dictionary];

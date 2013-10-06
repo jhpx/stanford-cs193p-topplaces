@@ -1,5 +1,5 @@
 //
-//  TopPlacesTVC.h
+//  FlickrTopPlacesTVC.h
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-27.
@@ -9,5 +9,6 @@
 #import "DataTableViewController.h"
 
 @interface FlickrTopPlacesTVC : DataTableViewController
+
 - (void)performAnnotationSegue:(id)sender;
 @end
