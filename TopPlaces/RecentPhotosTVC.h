@@ -6,9 +6,9 @@
 //  Copyright (c) 2013年 姜孟冯. All rights reserved.
 //
 
-#import "PlacePhotosTVC.h"
+#import "FlickrPlacePhotosTVC.h"
 #import "DataRepresent.h"
 
-@interface RecentPhotosTVC : PlacePhotosTVC <DataRepresent>
+@interface RecentPhotosTVC : FlickrPlacePhotosTVC <DataRepresent>
 
 @end

@@ -1,20 +1,20 @@
 //
-//  PlacePhotosTVC.m
+//  FlickrPlacePhotosTVC.m
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-26.
 //  Copyright (c) 2013年 姜孟冯. All rights reserved.
 //
 
-#import "PlacePhotosTVC.h"
+#import "FlickrPlacePhotosTVC.h"
 #import "FlickrFetcher.h"
 #import "ImageViewController.h"
 
-@interface PlacePhotosTVC ()
+@interface FlickrPlacePhotosTVC ()
 
 @end
 
-@implementation PlacePhotosTVC
+@implementation FlickrPlacePhotosTVC
 
 // items载入完成，停转activityIndicator
 -(void)setItemsHook:(NSArray*)items

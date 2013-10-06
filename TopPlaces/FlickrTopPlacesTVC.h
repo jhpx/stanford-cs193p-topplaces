@@ -1,5 +1,5 @@
 //
-//  TopPlacesTVC.h
+//  FlickrTopPlacesTVC.h
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-27.
@@ -9,7 +9,7 @@
 #import "DataTableViewController.h"
 #import "DataRepresent.h"
 
-@interface TopPlacesTVC : DataTableViewController <DataRepresent>
+@interface FlickrTopPlacesTVC : DataTableViewController <DataRepresent>
 
 
 @end

@@ -74,10 +74,10 @@
             </objects>
             <point key="canvasLocation" x="584" y="667"/>
         </scene>
-        <!--Top PlacesTVC - Places-->
+        <!--Flickr Top PlacesTVC - Places-->
         <scene sceneID="Sqw-Xp-930">
             <objects>
-                <tableViewController id="vuT-4h-3RL" customClass="TopPlacesTVC" sceneMemberID="viewController">
+                <tableViewController id="vuT-4h-3RL" customClass="FlickrTopPlacesTVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ehG-xC-pRs">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -123,10 +123,10 @@
             </objects>
             <point key="canvasLocation" x="542" y="-50"/>
         </scene>
-        <!--Place PhotosTVC - Photos-->
+        <!--Flickr Place PhotosTVC - Photos-->
         <scene sceneID="YZ4-p9-e73">
             <objects>
-                <tableViewController id="N11-5a-Lqn" customClass="PlacePhotosTVC" sceneMemberID="viewController">
+                <tableViewController id="N11-5a-Lqn" customClass="FlickrPlacePhotosTVC" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="yGh-bx-7OW">
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -259,9 +259,6 @@
         </class>
         <class className="RecentPhotosTVC" superclassName="PlacePhotosTVC">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RecentPhotosTVC.h"/>
-        </class>
-        <class className="TopPlacesTVC" superclassName="DataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TopPlacesTVC.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

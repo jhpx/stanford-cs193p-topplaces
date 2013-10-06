@@ -1,20 +1,20 @@
 //
-//  TopPlacesTVC.m
+//  FlickrTopPlacesTVC.m
 //  TopPlaces
 //
 //  Created by 姜孟冯 on 13-9-27.
 //  Copyright (c) 2013年 姜孟冯. All rights reserved.
 //
 
-#import "TopPlacesTVC.h"
+#import "FlickrTopPlacesTVC.h"
 #import "FlickrFetcher.h"
 
-@interface TopPlacesTVC ()
+@interface FlickrTopPlacesTVC ()
 
 @property (nonatomic, strong) NSDictionary *placesByCountry;
 @end
 
-@implementation TopPlacesTVC
+@implementation FlickrTopPlacesTVC
 
 // 载入页面后，异步获取Flickr上的topPlaces
 - (void)viewDidLoad
