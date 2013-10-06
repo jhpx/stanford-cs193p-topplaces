@@ -16,19 +16,7 @@
 
 @implementation FlickrTopPlacesTVC
 
-// 载入页面后，异步获取Flickr上的topPlaces
-- (void)viewDidLoad
-{
-    [super viewDidLoad];    
-    [self updateByMethod:^(){return [FlickrFetcher topPlaces];} callback:@selector(setItems:)];
-    //        for (NSDictionary *p in self.items)
-    //        {
-    //            NSLog(@"%@",p);
-    //        }
-}
-
 // 在setItems时，将places按照国家分组，索引表保存至self.placesByCountry
-// items载入完成，停转activityIndicator
 -(void)setItemsHook:(NSArray*)items
 {
     NSMutableDictionary *placesByCountry = [NSMutableDictionary dictionary];
@@ -42,28 +30,30 @@
         [places addObject:place];
     }
     self.placesByCountry = placesByCountry;
-    [self.activityIndicator stopAnimating];
 }
 
+#pragma mark - View Controller Lifecycle
 
-// 本地help方法,按照indexPath获取place
-- (NSDictionary *)placeByIndexPath:(NSIndexPath*)indexPath
+// 载入页面后，异步获取Flickr上的topPlaces
+- (void)viewDidLoad
 {
-    NSString *country = [self countryForSection:indexPath.section];
-    NSArray *placesByCountry = (self.placesByCountry)[country];
-    return placesByCountry[indexPath.row];
+    [super viewDidLoad];
+    [DataUtils updateByMethod:^(){return [FlickrFetcher topPlaces];} target:self callback:@selector(setItems:)];
+    
 }
 
-// 按行进行segue，异步获取Flickr上某一place的photos
+#pragma mark - Suegue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // 按行进行segue，异步获取Flickr上某一place的photos
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"List Place Photos"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
-                    NSDictionary *place = [self placeByIndexPath:indexPath];
-                    [segue.destinationViewController updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} callback:@selector(setItems:)];
+                    NSDictionary *place = [self itemByIndexPath:indexPath];
+                    [DataUtils updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} target:segue.destinationViewController callback:@selector(setItems:)];
                     [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
                 }
             }
@@ -99,21 +89,26 @@
 
 #pragma mark - DataRepresent
 
-- (NSString *)titleForIndexPath:(NSIndexPath*)indexPath
+- (NSString *)titleForItem:(NSDictionary *)place
 {
-    NSDictionary *place = [self placeByIndexPath:indexPath];
     return place[FLICKR_PLACE_WOE];
 }
 
-- (NSString *)subtitleForIndexPath:(NSIndexPath*)indexPath
+- (NSString *)subtitleForItem:(NSDictionary *)place
 {
-    NSDictionary *place = [self placeByIndexPath:indexPath];
     return [place[FLICKR_PLACE_NAME] substringFromIndex:[place[FLICKR_PLACE_WOE] length]+1];
 }
 
 - (NSString *)cellIdentifier
 {
     return @"Flickr Top Places";
+}
+
+- (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath
+{
+    NSString *country = [self countryForSection:indexPath.section];
+    NSArray *placesByCountry = (self.placesByCountry)[country];
+    return placesByCountry[indexPath.row];
 }
 
 

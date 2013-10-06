@@ -24,6 +24,7 @@
 		5EC4F1FA17F16A130069C059 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EC4F1F817F16A130069C059 /* MainStoryboard_iPad.storyboard */; };
 		5EC4F1FD17F16A130069C059 /* DataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4F1FC17F16A130069C059 /* DataTableViewController.m */; };
 		5EC4F20617F16BC80069C059 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EC4F20517F16BC80069C059 /* FlickrFetcher.m */; };
+		5EFFBBDF1801C1AD004034B3 /* DataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EFFBBDE1801C1AD004034B3 /* DataUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,8 @@
 		5EC4F20317F16BC80069C059 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
 		5EC4F20417F16BC80069C059 /* FlickrFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrFetcher.h; sourceTree = "<group>"; };
 		5EC4F20517F16BC80069C059 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrFetcher.m; sourceTree = "<group>"; };
+		5EFFBBDD1801C1AD004034B3 /* DataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataUtils.h; sourceTree = "<group>"; };
+		5EFFBBDE1801C1AD004034B3 /* DataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +105,8 @@
 		5EC4F1E317F16A130069C059 /* TopPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				5EFFBBDD1801C1AD004034B3 /* DataUtils.h */,
+				5EFFBBDE1801C1AD004034B3 /* DataUtils.m */,
 				5EC4F1F817F16A130069C059 /* MainStoryboard_iPad.storyboard */,
 				5EC4F1F517F16A130069C059 /* MainStoryboard_iPhone.storyboard */,
 				5E71F52417F51A70007DE635 /* DataRepresent.h */,
@@ -223,6 +228,7 @@
 				5E71F52717F51B5F007DE635 /* FlickrTopPlacesTVC.m in Sources */,
 				5E71F52A17F53B07007DE635 /* ImageViewController.m in Sources */,
 				5E97A65117F570C900142FFB /* RecentPhotosTVC.m in Sources */,
+				5EFFBBDF1801C1AD004034B3 /* DataUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

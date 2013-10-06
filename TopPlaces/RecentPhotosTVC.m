@@ -39,6 +39,8 @@
 }
 
 
+#pragma mark - UITableViewDelegate
+
 // 实现最近访问photo列表的删除功能
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {

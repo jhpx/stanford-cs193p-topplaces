@@ -20,13 +20,15 @@
         _activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         _activityIndicator.color=[UIColor grayColor];
         _activityIndicator.hidesWhenStopped = YES;
-        _activityIndicator.center = self.tableView.center;
+        _activityIndicator.center = CGPointMake(160, 240);
         [_activityIndicator startAnimating];
     }
     return _activityIndicator;
 }
 
 // 预留一个setItemsHook函数，供子类在reloadData前对数据进行Hook处理
+// items载入完成，停转activityIndicator
+
 - (void)setItems:(NSArray *)items
 {
     if(_items!=items)
@@ -35,11 +37,20 @@
         if ([self respondsToSelector:@selector(setItemsHook:)]){
             [self performSelector:@selector(setItemsHook:) withObject:items];
         }
+        
+        //        for (NSDictionary *p in _items)
+        //        {
+        //            NSLog(@"%@",p);
+        //        }
+        
+        [self.activityIndicator stopAnimating];
         [self.tableView reloadData];
     }
 }
 
-// 载入页面后，异步获取Flickr上的topPlaces
+#pragma mark - View Controller Lifecycle
+
+// 载入页面后，加载activityIndicator，开始旋转
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,6 +62,7 @@
     [self.tableView reloadData];
 }
 
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -59,39 +71,51 @@
 }
 
 // 调用了三个指定方法，均在DataRepresent.h协议中给出，子类必须实现此协议。
-//- (NSString *)titleForIndexPath:(NSIndexPath*)indexPath;
-//- (NSString *)subtitleForIndexPath:(NSIndexPath*)indexPath;
+//- (NSString *)titleForItem:(NSDictionary*)item;
+//- (NSString *)subtitleForItem:(NSDictionary*)item;
 //- (NSString *)cellIdentifier;
-
+//- (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [self performSelector:@selector(cellIdentifier) ];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    if ([self conformsToProtocol:@protocol(DataRepresent)]) {
+        NSString *CellIdentifier = [self performSelector:@selector(cellIdentifier) ];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        }
+        
+        // Configure the cell...
+        NSDictionary *item = [self performSelector:@selector(itemByIndexPath:) withObject:indexPath];
+        cell.textLabel.text = [self performSelector:@selector(titleForItem:)  withObject:item];
+        cell.detailTextLabel.text = [self performSelector:@selector(subtitleForItem:) withObject:item];
+        return cell;
+    }
+    else{
+        return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
     }
     
-    // Configure the cell...
-    cell.textLabel.text = [self performSelector:@selector(titleForIndexPath:)  withObject:indexPath];
-    cell.detailTextLabel.text = [self performSelector:@selector(subtitleForIndexPath:) withObject:indexPath];
-    return cell;
 }
     
-// 异步刷新数据，以任意block方式在后台线程刷新，刷新完成后回主线程调用target的callback方法
-- (void) updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
+#pragma mark - DataRepresent
+// 默认返回nil，子类必须覆盖
+
+- (NSString *)titleForItem:(NSDictionary*)item
 {
-    dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
-    dispatch_async(downloadQueue, ^{
-        id something = updateMethod();
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([self respondsToSelector:callback]) {
-                _Pragma("clang diagnostic push") \
-                _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
-                [self performSelector:callback withObject:something];
-                _Pragma("clang diagnostic pop") \
-            }
-        });
-    });
+    return nil;
 }
 
+- (NSString *)subtitleForItem:(NSDictionary*)item
+{
+    return nil;
+}
+
+- (NSString *)cellIdentifier
+{
+    return nil;
+}
+
+- (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath
+{
+    return nil;
+}
 @end

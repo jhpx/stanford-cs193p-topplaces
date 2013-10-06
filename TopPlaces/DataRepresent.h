@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @protocol DataRepresent <NSObject>
-- (NSString *)titleForIndexPath:(NSIndexPath*)indexPath;
-- (NSString *)subtitleForIndexPath:(NSIndexPath*)indexPath;
+@required
+- (NSString *)titleForItem:(NSDictionary*)item;
+- (NSString *)subtitleForItem:(NSDictionary*)item;
 - (NSString *)cellIdentifier;
+- (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath;
 @end

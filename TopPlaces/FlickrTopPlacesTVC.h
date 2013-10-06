@@ -7,9 +7,8 @@
 //
 
 #import "DataTableViewController.h"
-#import "DataRepresent.h"
 
-@interface FlickrTopPlacesTVC : DataTableViewController <DataRepresent>
+@interface FlickrTopPlacesTVC : DataTableViewController
 
 
 @end

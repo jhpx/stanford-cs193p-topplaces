@@ -7,6 +7,7 @@
 //
 
 #import "ImageViewController.h"
+#import "DataUtils.h"
 
 @interface ImageViewController ()<UIScrollViewDelegate>
 
@@ -22,7 +23,7 @@
 {
     _imageURL = imageURL;
     [self.activityIndicator startAnimating];
-    [self updateByMethod:^{return [self reloadImage];} callback:@selector(resetScrollAndImageView:)];
+    [DataUtils updateByMethod:^{return [self reloadImage];} target:self callback:@selector(resetScrollAndImageView:)];
 }
 
 // 按照imageURL刷新图片，重方法，需异步调用
@@ -61,23 +62,6 @@
     self.scrollView.maximumZoomScale = 5.0;
     self.scrollView.delegate = self;
     [self resetScrollAndImageView:self.imageView.image];
-}
-
-// 异步刷新数据，以任意block方式在后台线程刷新，刷新完成后回主线程调用target的callback方法
-- (void) updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
-{
-    dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
-    dispatch_async(downloadQueue, ^{
-        id something = updateMethod();
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([self respondsToSelector:callback]) {
-                _Pragma("clang diagnostic push") \
-                _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
-                [self performSelector:callback withObject:something];
-                _Pragma("clang diagnostic pop") \
-            }
-        });
-    });
 }
 
 

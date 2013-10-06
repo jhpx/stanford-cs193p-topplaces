@@ -16,28 +16,26 @@
 
 @implementation FlickrPlacePhotosTVC
 
-// items载入完成，停转activityIndicator
--(void)setItemsHook:(NSArray*)items
-{
-    [self.activityIndicator stopAnimating];
-}
+#pragma mark - Suegue
 
-
-// 按行进行segue，异步获取Flickr上某一photo的实际image
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // 按行进行segue，异步获取Flickr上某一photo的实际image
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Photo"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
-                    [segue.destinationViewController updateByMethod:^{return [FlickrFetcher urlForPhoto:self.items[indexPath.row] format:FlickrPhotoFormatLarge];} callback:@selector(setImageURL:)];
-                    [segue.destinationViewController setTitle:[self titleForIndexPath:indexPath]];
+                    NSDictionary* photo = [self itemByIndexPath: indexPath];
+                    [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
+                    [segue.destinationViewController setTitle:[self titleForItem:photo]];
                 }
             }
         }
     }
 }
+
+#pragma mark - UITableViewDataSource
 
 // 与按行segue同时执行，刷新并保存最新访问photos列表
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -58,9 +56,9 @@
 
 #pragma mark - DataRepresent
 
-- (NSString *)titleForIndexPath:(NSIndexPath*)indexPath
+- (NSString *)titleForItem:(NSDictionary *)photo
 {
-    NSDictionary *photo = self.items[indexPath.row];
+    
     NSString *result = photo[FLICKR_PHOTO_TITLE];
     if (![result length]) {
         result = photo[FLICKR_PHOTO_DESCRIPTION];
@@ -71,15 +69,20 @@
     return result;
 }
 
-- (NSString *)subtitleForIndexPath:(NSIndexPath*)indexPath
+- (NSString *)subtitleForItem:(NSDictionary *)photo
 {
-    NSDictionary *photo = self.items[indexPath.row];
+    
     return photo[FLICKR_PHOTO_DESCRIPTION];
 }
 
 - (NSString *)cellIdentifier
 {
     return @"Flickr Photos";
+}
+
+- (NSDictionary *)itemByIndexPath:(NSIndexPath*)indexPath
+{
+    return self.items[indexPath.row];
 }
 
 
