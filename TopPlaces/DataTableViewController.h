@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DataRepresent.h"
+#import "DataUtils.h"
 
 @interface DataTableViewController : UITableViewController <DataRepresent>
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic) UIActivityIndicatorView * activityIndicator;
-- (void)updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
 - (void)updateMapViewController:(UIViewController*)controller;
 @end

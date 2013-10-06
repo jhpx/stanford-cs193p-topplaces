@@ -16,21 +16,24 @@
 
 @implementation FlickrPlacePhotosTVC
 
-// 按行进行segue，异步获取Flickr上某一photo的实际image
+#pragma mark - Suegue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // 按行进行segue，异步获取Flickr上某一photo的实际image
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Photo"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
                     NSDictionary* photo = [self itemByIndexPath: indexPath];
-                    [segue.destinationViewController updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} callback:@selector(setImageURL:)];
+                    [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
                     [segue.destinationViewController setTitle:[self titleForItem:photo]];
                 }
             }
         }
     }
+    // iphone右上按钮segue，跳转至map画面
     else if ([sender isKindOfClass:[UIBarButtonItem class]]) {
         if ([segue.identifier isEqualToString:@"Show Map"]) {
             [self updateMapViewController:segue.destinationViewController];
@@ -38,6 +41,8 @@
         
     }
 }
+
+#pragma mark - UITableViewDataSource
 
 // 与按行segue同时执行，刷新并保存最新访问photos列表
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

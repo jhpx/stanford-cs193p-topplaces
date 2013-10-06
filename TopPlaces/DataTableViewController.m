@@ -52,6 +52,8 @@
     }
 }
 
+#pragma mark - View Controller Lifecycle
+
 // 载入页面后，加载activityIndicator，开始旋转
 - (void)viewDidLoad
 {
@@ -63,6 +65,7 @@
 {
     [self.tableView reloadData];
 }
+
 
 #pragma mark - UITableViewDataSource
 
@@ -95,44 +98,6 @@
         return [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
     }
     
-}
-
-// 异步刷新数据，以任意block方式在后台线程刷新，刷新完成后回主线程调用target的callback方法
-- (void)updateByMethod:(id(^)())updateMethod callback:(SEL)callback;
-{
-    dispatch_queue_t downloadQueue = dispatch_queue_create("downloader", NULL);
-    dispatch_async(downloadQueue, ^{
-        //        id something = @[updateMethod()[0]];
-        id something = updateMethod();
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([self respondsToSelector:callback]) {
-                _Pragma("clang diagnostic push") \
-                _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
-                [self performSelector:callback withObject:something];
-                _Pragma("clang diagnostic pop") \
-            }
-        });
-    });
-}
-
-- (NSArray *)mapAnnotations
-{
-    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:[self.items count]];
-    for (NSDictionary *item in self.items) {
-        ItemAnnotation *ia = [ItemAnnotation annotationForItem:item];
-        ia.delegate = self;
-        [annotations addObject:ia];
-    }
-    return annotations;
-}
-
-- (void)updateMapViewController:(UIViewController*)controller
-{
-    if ([controller isKindOfClass:[MapViewController class]]) {
-        MapViewController *mapVC = (MapViewController *)controller;
-        mapVC.delegate = self;
-        mapVC.annotations = [self mapAnnotations];
-    }
 }
 
 #pragma mark - MapViewControllerDelegate
@@ -173,4 +138,27 @@
 {
     return nil;
 }
+
+#pragma mark - open methods
+
+- (NSArray *)mapAnnotations
+{
+    NSMutableArray *annotations = [NSMutableArray arrayWithCapacity:[self.items count]];
+    for (NSDictionary *item in self.items) {
+        ItemAnnotation *ia = [ItemAnnotation annotationForItem:item];
+        ia.delegate = self;
+        [annotations addObject:ia];
+    }
+    return annotations;
+}
+
+- (void)updateMapViewController:(UIViewController*)controller
+{
+    if ([controller isKindOfClass:[MapViewController class]]) {
+        MapViewController *mapVC = (MapViewController *)controller;
+        mapVC.delegate = self;
+        mapVC.annotations = [self mapAnnotations];
+    }
+}
+
 @end

@@ -16,14 +16,6 @@
 
 @implementation FlickrTopPlacesTVC
 
-// 载入页面后，异步获取Flickr上的topPlaces
-- (void)viewDidLoad
-{
-    [super viewDidLoad];    
-    [self updateByMethod:^(){return [FlickrFetcher topPlaces];} callback:@selector(setItems:)];
-
-}
-
 // 在setItems时，将places按照国家分组，索引表保存至self.placesByCountry
 // items载入完成，停转activityIndicator
 -(void)setItemsHook:(NSArray*)items
@@ -41,43 +33,42 @@
     self.placesByCountry = placesByCountry;
 }
 
+#pragma mark - View Controller Lifecycle
 
-// 按行进行segue，异步获取Flickr上某一place的photos
+// 载入页面后，异步获取Flickr上的topPlaces
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [DataUtils updateByMethod:^(){return [FlickrFetcher topPlaces];} target:self callback:@selector(setItems:)];
+    
+}
+
+#pragma mark - Suegue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    // 按行进行segue，异步获取Flickr上某一place的photos
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"List Place Photos"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
                     NSDictionary *place = [self itemByIndexPath:indexPath];
-                    [segue.destinationViewController updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} callback:@selector(setItems:)];
+                    [DataUtils updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} target:segue.destinationViewController callback:@selector(setItems:)];
                     [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
                 }
             }
         }
     }
+    // iphone右上按钮segue，跳转至map画面
     else if ([sender isKindOfClass:[UIBarButtonItem class]]) {
-            if ([segue.identifier isEqualToString:@"Show Map"]) {
-                [self updateMapViewController:segue.destinationViewController];
-            }
+        if ([segue.identifier isEqualToString:@"Show Map"]) {
+            [self updateMapViewController:segue.destinationViewController];
+        }
         
     }
-
+    
 }
-
-// 与按行segue同时执行
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//        if (indexPath) {
-//                if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
-//                    NSDictionary *place = [self placeByIndexPath:indexPath];
-//                    [segue.destinationViewController updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} callback:@selector(setItems:)];
-//                    [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
-//                }
-//            }
-//        }
-//}
 
 #pragma mark - UITableViewDataSource
 

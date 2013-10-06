@@ -100,9 +100,7 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)aView
 {
-    
-    UIImage *image = [self.delegate mapViewController:self imageForAnnotation:aView.annotation];
-    if (image) [(UIImageView *)aView.leftCalloutAccessoryView setImage:image];
+    [DataUtils updateByMethod:^(){return [self.delegate mapViewController:self imageForAnnotation:aView.annotation];} target:(UIImageView *)aView.leftCalloutAccessoryView callback:@selector(setImage:)];
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
@@ -123,6 +121,5 @@
     [self setMapView:nil];
     [super viewDidUnload];
 }
-
 
 @end

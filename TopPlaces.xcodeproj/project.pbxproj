@@ -10,6 +10,7 @@
 		5E71F52017F40FB8007DE635 /* FlickrPlacePhotosTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71F51F17F40FB8007DE635 /* FlickrPlacePhotosTVC.m */; };
 		5E71F52717F51B5F007DE635 /* FlickrTopPlacesTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71F52617F51B5F007DE635 /* FlickrTopPlacesTVC.m */; };
 		5E71F52A17F53B07007DE635 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E71F52917F53B06007DE635 /* ImageViewController.m */; };
+		5E7FC0321801646600AEBCED /* DataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E7FC0311801646600AEBCED /* DataUtils.m */; };
 		5E97A65117F570C900142FFB /* RecentPhotosTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E97A65017F570C900142FFB /* RecentPhotosTVC.m */; };
 		5E987D1617FBC94B008CAC37 /* ItemAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E987D1517FBC94B008CAC37 /* ItemAnnotation.m */; };
 		5E987D1917FBD3BA008CAC37 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E987D1817FBD3BA008CAC37 /* CoreLocation.framework */; };
@@ -38,6 +39,8 @@
 		5E71F52617F51B5F007DE635 /* FlickrTopPlacesTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrTopPlacesTVC.m; sourceTree = "<group>"; };
 		5E71F52817F53B06007DE635 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		5E71F52917F53B06007DE635 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
+		5E7FC0301801646600AEBCED /* DataUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataUtils.h; sourceTree = "<group>"; };
+		5E7FC0311801646600AEBCED /* DataUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataUtils.m; sourceTree = "<group>"; };
 		5E97A64F17F570C900142FFB /* RecentPhotosTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentPhotosTVC.h; sourceTree = "<group>"; };
 		5E97A65017F570C900142FFB /* RecentPhotosTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentPhotosTVC.m; sourceTree = "<group>"; };
 		5E987D1417FBC94B008CAC37 /* ItemAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemAnnotation.h; sourceTree = "<group>"; };
@@ -127,6 +130,8 @@
 		5EC4F1E317F16A130069C059 /* TopPlaces */ = {
 			isa = PBXGroup;
 			children = (
+				5E7FC0301801646600AEBCED /* DataUtils.h */,
+				5E7FC0311801646600AEBCED /* DataUtils.m */,
 				5EC4F1F817F16A130069C059 /* MainStoryboard_iPad.storyboard */,
 				5EC4F1F517F16A130069C059 /* MainStoryboard_iPhone.storyboard */,
 				5E71F52417F51A70007DE635 /* DataRepresent.h */,
@@ -251,6 +256,7 @@
 				5E97A65117F570C900142FFB /* RecentPhotosTVC.m in Sources */,
 				5E987D1617FBC94B008CAC37 /* ItemAnnotation.m in Sources */,
 				5E987D1E17FBD4EF008CAC37 /* MapViewController.m in Sources */,
+				5E7FC0321801646600AEBCED /* DataUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
