@@ -126,7 +126,7 @@
                     <navigationItem key="navigationItem" title="Places" id="w5e-RJ-WXb">
                         <barButtonItem key="rightBarButtonItem" title="Map" id="BzW-DJ-mVi">
                             <connections>
-                                <segue destination="Y0B-fV-rTa" kind="push" identifier="Show Map" id="KBC-nb-4aA"/>
+                                <segue destination="QHN-xs-dB5" kind="push" identifier="Show Map" id="Apg-xV-K9F"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -213,30 +213,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1z6-x6-McO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-119" y="438"/>
-        </scene>
-        <!--Map View Controller - Places-->
-        <scene sceneID="yg3-ww-Gjm">
-            <objects>
-                <viewController id="Y0B-fV-rTa" customClass="MapViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HrA-tX-dy4">
-                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="foA-KQ-9VF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </mapView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Places" id="kdM-pf-kM7"/>
-                    <connections>
-                        <outlet property="mapView" destination="foA-KQ-9VF" id="EDl-tL-R3U"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B61-KZ-pB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-119" y="-281"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="PIl-Pz-tFI">
@@ -342,7 +318,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="dBN-56-9wL"/>
+        <segue reference="Apg-xV-K9F"/>
         <segue reference="NeR-pd-krW"/>
     </inferredMetricsTieBreakers>
 </document>

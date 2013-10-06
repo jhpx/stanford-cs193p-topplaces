@@ -109,7 +109,9 @@
     if ([self.delegate respondsToSelector:@selector(performAnnotationSegue:)]) {
         [self.delegate performSelector:@selector(performAnnotationSegue:) withObject:view.annotation];
     }
-    NSLog(@"callout accessory tapped for annotation %@", [view.annotation title]);
+    else {
+        NSLog(@"callout accessory tapped for annotation %@", [view.annotation title]);
+    }
 }
 
 #pragma mark - View Controller Lifecycle
