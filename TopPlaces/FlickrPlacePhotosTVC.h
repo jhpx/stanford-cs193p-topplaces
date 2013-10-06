@@ -12,5 +12,5 @@
 #define RECENT_PHOTOS_KEY @"RecentPhotosViewController.RecentPhotos"
 
 @interface FlickrPlacePhotosTVC : DataTableViewController
-
+- (void)performAnnotationSegue:(id)sender;
 @end

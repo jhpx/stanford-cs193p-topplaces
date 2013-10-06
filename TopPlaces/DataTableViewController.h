@@ -10,6 +10,8 @@
 #import "DataRepresent.h"
 #import "DataUtils.h"
 
+#import "ItemAnnotation.h"
+
 @interface DataTableViewController : UITableViewController <DataRepresent>
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic) UIActivityIndicatorView * activityIndicator;

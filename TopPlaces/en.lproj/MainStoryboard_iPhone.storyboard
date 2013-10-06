@@ -153,7 +153,6 @@
                     <navigationItem key="navigationItem" title="Photos" id="0TU-uU-A2O"/>
                     <connections>
                         <outlet property="mapView" destination="g9A-ZC-K97" id="Lfl-sG-Bzd"/>
-                        <segue destination="Vmh-H4-OKj" kind="push" identifier="Show Photo" id="UHK-PQ-ihq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vFI-Ix-Ztd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -233,7 +232,6 @@
                     <navigationItem key="navigationItem" title="Places" id="kdM-pf-kM7"/>
                     <connections>
                         <outlet property="mapView" destination="foA-KQ-9VF" id="EDl-tL-R3U"/>
-                        <segue destination="QHN-xs-dB5" kind="push" identifier="Map Place Photos" id="sQu-85-LMr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B61-KZ-pB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -344,7 +342,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="IbB-Yo-h8h"/>
-        <segue reference="UHK-PQ-ihq"/>
+        <segue reference="dBN-56-9wL"/>
+        <segue reference="NeR-pd-krW"/>
     </inferredMetricsTieBreakers>
 </document>

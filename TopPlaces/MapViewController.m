@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "DataUtils.h"
 
 @interface MapViewController() <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -89,7 +90,7 @@
         aView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MapVC"];
         aView.canShowCallout = YES;
         aView.leftCalloutAccessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        // could put a rightCalloutAccessoryView here
+        aView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     }
     
     aView.annotation = annotation;
@@ -105,6 +106,9 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
+    if ([self.delegate respondsToSelector:@selector(performAnnotationSegue:)]) {
+        [self.delegate performSelector:@selector(performAnnotationSegue:) withObject:view.annotation];
+    }
     NSLog(@"callout accessory tapped for annotation %@", [view.annotation title]);
 }
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "DataUtils.h"
+#import "DataRepresent.h"
 
 @class MapViewController;
 
@@ -18,5 +18,5 @@
 
 @interface MapViewController : UIViewController
 @property (nonatomic, strong) NSArray *annotations; // of id <MKAnnotation>
-@property (nonatomic, weak) id <MapViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <MapViewControllerDelegate,DataRepresent> delegate;
 @end

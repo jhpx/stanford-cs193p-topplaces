@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DataUtils.h"
 
 @interface ImageViewController : UIViewController
 @property (nonatomic, strong) NSURL *imageURL;

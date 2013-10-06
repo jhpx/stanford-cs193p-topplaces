@@ -8,7 +8,6 @@
 
 #import "DataTableViewController.h"
 #import "MapViewController.h"
-#import "ItemAnnotation.h"
 
 @interface DataTableViewController () <MapViewControllerDelegate>
 @end

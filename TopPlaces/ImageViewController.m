@@ -7,6 +7,7 @@
 //
 
 #import "ImageViewController.h"
+#import "DataUtils.h"
 
 @interface ImageViewController ()<UIScrollViewDelegate>
 
