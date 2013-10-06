@@ -60,6 +60,7 @@
 
 - (void)updateMapView
 {
+    if (!self.mapView.delegate) self.mapView.delegate = self;
     if (self.mapView.annotations) [self.mapView removeAnnotations:self.mapView.annotations];
     if (self.annotations) {
         [self.mapView addAnnotations:self.annotations];
@@ -99,8 +100,9 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)aView
 {
+    
     UIImage *image = [self.delegate mapViewController:self imageForAnnotation:aView.annotation];
-    if (!image) [(UIImageView *)aView.leftCalloutAccessoryView setImage:image];
+    if (image) [(UIImageView *)aView.leftCalloutAccessoryView setImage:image];
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
