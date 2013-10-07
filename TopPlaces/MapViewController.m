@@ -9,11 +9,21 @@
 #import "MapViewController.h"
 #import "DataUtils.h"
 
-@interface MapViewController() <MKMapViewDelegate>
+@interface MapViewController() <MKMapViewDelegate,UISplitViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *titleBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *splitViewBarButtonItem;
 @end
 
 @implementation MapViewController
+
+-(void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    self.titleBarButtonItem.title = title;
+}
+
 
 #define MINIMUM_ZOOM_ARC 0.014 //approximately 1 miles (1 degree of arc ~= 69 miles)
 #define ANNOTATION_REGION_PAD_FACTOR 1.15
@@ -120,6 +130,14 @@
 {
     [super viewDidLoad];
     self.mapView.delegate = self;
+    [self handleSplitViewBarButtonItem:self.splitViewBarButtonItem];
+}
+
+
+- (void)awakeFromNib  // always try to be the split view's delegate
+{
+    [super awakeFromNib];
+    self.splitViewController.delegate = self;
 }
 
 - (void)viewDidUnload
@@ -128,4 +146,44 @@
     [super viewDidUnload];
 }
 
+- (void)handleSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
+    if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
+    self.toolbar.items = toolbarItems;
+    _splitViewBarButtonItem = splitViewBarButtonItem;
+}
+
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    if (splitViewBarButtonItem != _splitViewBarButtonItem) {
+        [self handleSplitViewBarButtonItem:splitViewBarButtonItem];
+    }
+}
+
+#pragma mark - UISplitViewControllerDelegate
+
+- (BOOL)splitViewController:(UISplitViewController *)svc
+   shouldHideViewController:(UIViewController *)vc
+              inOrientation:(UIInterfaceOrientation)orientation
+{
+    return UIInterfaceOrientationIsPortrait(orientation);
+}
+
+- (void)splitViewController:(UISplitViewController *)svc
+     willHideViewController:(UIViewController *)aViewController
+          withBarButtonItem:(UIBarButtonItem *)barButtonItem
+       forPopoverController:(UIPopoverController *)pc
+{
+    barButtonItem.title = @"List";
+    self.splitViewBarButtonItem = barButtonItem;
+}
+
+- (void)splitViewController:(UISplitViewController *)svc
+     willShowViewController:(UIViewController *)aViewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    self.splitViewBarButtonItem = nil;
+}
 @end

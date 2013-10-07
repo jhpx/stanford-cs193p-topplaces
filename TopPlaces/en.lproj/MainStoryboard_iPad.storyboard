@@ -19,8 +19,12 @@
                             </mapView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="kg7-cH-Pu8">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="erE-uF-hV8"/>
+                                    <barButtonItem title="Map" style="plain" id="Bmj-cA-aii"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="x89-bF-iyU"/>
+                                </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -28,6 +32,8 @@
                     <toolbarItems/>
                     <connections>
                         <outlet property="mapView" destination="bzp-0z-iuw" id="5DC-U2-3UO"/>
+                        <outlet property="titleBarButtonItem" destination="Bmj-cA-aii" id="ZB2-6e-9Ks"/>
+                        <outlet property="toolbar" destination="kg7-cH-Pu8" id="ULa-zO-nKb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zuQ-Rg-9xc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -268,8 +274,12 @@
                             </activityIndicatorView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="cDy-Sp-HZJ">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="cLO-C3-Btb"/>
+                                    <barButtonItem title="Item" style="plain" id="gLw-Vm-WrB"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Dx7-sV-Y9Y"/>
+                                </items>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -280,6 +290,8 @@
                         <outlet property="activityIndicator" destination="zfy-yR-hRo" id="cUh-4t-qKi"/>
                         <outlet property="imageView" destination="ECl-GJ-rsU" id="Sp6-AG-2cY"/>
                         <outlet property="scrollView" destination="q77-KZ-Ojj" id="QAk-QT-3t1"/>
+                        <outlet property="titleBarButtonItem" destination="gLw-Vm-WrB" id="YSt-t2-aZp"/>
+                        <outlet property="toolbar" destination="cDy-Sp-HZJ" id="bb4-Yn-wvO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBH-Xe-tix" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -303,12 +315,16 @@
                 <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="titleBarButtonItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
         <class className="MapViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="titleBarButtonItem" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
             </relationships>
         </class>
         <class className="RecentPhotosTVC" superclassName="FlickrPlacePhotosTVC">

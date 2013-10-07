@@ -11,12 +11,21 @@
 
 @interface ImageViewController ()<UIScrollViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *titleBarButtonItem;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation ImageViewController
+
+-(void)setTitle:(NSString *)title
+{
+    [super setTitle:title];
+    self.titleBarButtonItem.title = title;
+}
+
 
 // 当setImageURL时刷新图片,activityIndicator开始转动
 - (void)setImageURL:(NSURL *)imageURL
