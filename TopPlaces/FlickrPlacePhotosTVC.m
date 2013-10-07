@@ -27,8 +27,8 @@
             if ([segue.identifier isEqualToString:@"Show Photo"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
                     NSDictionary* photo = [self itemByIndexPath: indexPath];
-                    [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
                     [segue.destinationViewController setTitle:[self titleForItem:photo]];
+                    [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
                 }
             }
         }
@@ -45,8 +45,9 @@
         if ([segue.identifier isEqualToString:@"Show Photo"]) {
             if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
                 NSDictionary* photo = [(ItemAnnotation*)sender item];
-                [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
+                
                 [segue.destinationViewController setTitle:[sender title]];
+                [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
             }
         }
         

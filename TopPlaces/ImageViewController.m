@@ -11,8 +11,8 @@
 
 @interface ImageViewController ()<UIScrollViewDelegate>
 
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *titleBarButtonItem;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -73,12 +73,10 @@
     [self resetScrollAndImageView:self.imageView.image];
 }
 
-
 #pragma mark - UIScrollViewDelegate
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.imageView;
 }
-
 @end

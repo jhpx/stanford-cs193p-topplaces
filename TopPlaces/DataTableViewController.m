@@ -73,7 +73,7 @@
     return [self.items count];
 }
 
-// 调用了三个指定方法，均在DataRepresent.h协议中给出，子类必须实现此协议。
+// 调用了四个指定方法，均在DataRepresent.h协议中给出，子类必须实现此协议。
 //- (NSString *)titleForItem:(NSDictionary*)item;
 //- (NSString *)subtitleForItem:(NSDictionary*)item;
 //- (NSString *)cellIdentifier;
@@ -157,7 +157,12 @@
         MapViewController *mapVC = (MapViewController *)controller;
         mapVC.delegate = self;
         mapVC.annotations = [self mapAnnotations];
+        if (self.title) {
+            mapVC.title = [self.title stringByAppendingString:@" Map"];
+        }
+        else {
+            mapVC.title = @"Map";
+        }
     }
 }
-
 @end

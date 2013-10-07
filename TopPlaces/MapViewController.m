@@ -117,7 +117,9 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     if ([self.delegate respondsToSelector:@selector(performAnnotationSegue:)]) {
+        [self.navigationController popViewControllerAnimated:NO];
         [self.delegate performSelector:@selector(performAnnotationSegue:) withObject:view.annotation];
+       
     }
     else {
         NSLog(@"callout accessory tapped for annotation %@", [view.annotation title]);
