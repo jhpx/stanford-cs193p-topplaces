@@ -13,6 +13,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *titleBarButtonItem;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -78,5 +79,23 @@
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
     return self.imageView;
+}
+
+#pragma mark - SplitViewBarButtonItemPresenter
+
+- (void)handleSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
+    if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
+    self.toolbar.items = toolbarItems;
+    _splitViewBarButtonItem = splitViewBarButtonItem;
+}
+
+- (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
+{
+    if (splitViewBarButtonItem != _splitViewBarButtonItem) {
+        [self handleSplitViewBarButtonItem:splitViewBarButtonItem];
+    }
 }
 @end

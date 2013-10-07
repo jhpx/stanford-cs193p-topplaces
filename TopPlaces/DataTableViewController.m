@@ -8,8 +8,9 @@
 
 #import "DataTableViewController.h"
 #import "MapViewController.h"
+#import "SplitViewBarButtonItemPresenter.h"
 
-@interface DataTableViewController () <MapViewControllerDelegate>
+@interface DataTableViewController () <MapViewControllerDelegate,UISplitViewControllerDelegate>
 @end
 
 @implementation DataTableViewController
@@ -38,12 +39,7 @@
         if ([self respondsToSelector:@selector(setItemsHook:)]){
             [self performSelector:@selector(setItemsHook:) withObject:items];
         }
-        
-        //        for (NSDictionary *p in _items)
-        //        {
-        //            NSLog(@"%@",p);
-        //        }
-        
+                
         [self updateMapViewController:[self.splitViewController.viewControllers lastObject]]; //for ipad
         
         [self.activityIndicator stopAnimating];
@@ -62,6 +58,10 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    if ([self respondsToSelector:@selector(setSplitViewControllerDelegate:)]) {
+        [self performSelector:@selector(setSplitViewControllerDelegate)];
+    }
     [self.tableView reloadData];
 }
 
@@ -165,4 +165,40 @@
         }
     }
 }
+
+#pragma mark - UISplitViewControllerDelegate
+
+- (id <SplitViewBarButtonItemPresenter>)splitViewBarButtonItemPresenter
+{
+    id detailVC = [self.splitViewController.viewControllers lastObject];
+    if (![detailVC conformsToProtocol:@protocol(SplitViewBarButtonItemPresenter)]) {
+        detailVC = nil;
+    }
+    return detailVC;
+}
+
+- (BOOL)splitViewController:(UISplitViewController *)svc
+   shouldHideViewController:(UIViewController *)vc
+              inOrientation:(UIInterfaceOrientation)orientation
+{
+    return [self splitViewBarButtonItemPresenter] ? UIInterfaceOrientationIsPortrait(orientation) : NO;
+}
+
+- (void)splitViewController:(UISplitViewController *)svc
+     willHideViewController:(UIViewController *)aViewController
+          withBarButtonItem:(UIBarButtonItem *)barButtonItem
+       forPopoverController:(UIPopoverController *)pc
+{
+    barButtonItem.title = self.title;
+    [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = barButtonItem;
+}
+
+- (void)splitViewController:(UISplitViewController *)svc
+     willShowViewController:(UIViewController *)aViewController
+  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = nil;
+}
+
+
 @end

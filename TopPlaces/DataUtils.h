@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
 @interface DataUtils : NSObject
 + (void)updateByMethod:(id(^)())updateMethod target:(id)target callback:(SEL)callback;
++ (void)zoomMapViewToFitAnnotations:(MKMapView *)mapView animated:(BOOL)animated;
 @end

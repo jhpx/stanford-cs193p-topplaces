@@ -34,6 +34,7 @@
                         <outlet property="mapView" destination="bzp-0z-iuw" id="5DC-U2-3UO"/>
                         <outlet property="titleBarButtonItem" destination="Bmj-cA-aii" id="ZB2-6e-9Ks"/>
                         <outlet property="toolbar" destination="kg7-cH-Pu8" id="ULa-zO-nKb"/>
+                        <segue destination="O3m-Yo-KUM" kind="push" identifier="Show Photo" id="c5R-5W-CQA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zuQ-Rg-9xc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -122,9 +123,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="O3m-Yo-KUM" kind="replace" identifier="Show Photo" splitViewControllerTargetIndex="1" id="wra-wA-SDa"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -220,9 +218,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="O3m-Yo-KUM" kind="replace" identifier="Show Photo" splitViewControllerTargetIndex="1" id="qSA-b1-E32"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -290,12 +285,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="NTy-Km-BTZ"/>
                     <connections>
                         <outlet property="activityIndicator" destination="zfy-yR-hRo" id="cUh-4t-qKi"/>
                         <outlet property="imageView" destination="ECl-GJ-rsU" id="Sp6-AG-2cY"/>
                         <outlet property="scrollView" destination="f7W-F7-YW2" id="ouh-aJ-uUs"/>
                         <outlet property="titleBarButtonItem" destination="gLw-Vm-WrB" id="YSt-t2-aZp"/>
-                        <outlet property="toolbar" destination="cDy-Sp-HZJ" id="bb4-Yn-wvO"/>
+                        <outlet property="toolbar" destination="cDy-Sp-HZJ" id="BAR-j5-1QE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zBH-Xe-tix" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -340,7 +336,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="qSA-b1-E32"/>
-    </inferredMetricsTieBreakers>
 </document>

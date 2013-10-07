@@ -32,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5E48DBFC1802FA2600B719F0 /* SplitViewBarButtonItemPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplitViewBarButtonItemPresenter.h; sourceTree = "<group>"; };
 		5E71F51E17F40FB8007DE635 /* FlickrPlacePhotosTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPlacePhotosTVC.h; sourceTree = "<group>"; };
 		5E71F51F17F40FB8007DE635 /* FlickrPlacePhotosTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPlacePhotosTVC.m; sourceTree = "<group>"; };
 		5E71F52417F51A70007DE635 /* DataRepresent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataRepresent.h; sourceTree = "<group>"; };
@@ -135,6 +136,7 @@
 				5EC4F1F817F16A130069C059 /* MainStoryboard_iPad.storyboard */,
 				5EC4F1F517F16A130069C059 /* MainStoryboard_iPhone.storyboard */,
 				5E71F52417F51A70007DE635 /* DataRepresent.h */,
+				5E48DBFC1802FA2600B719F0 /* SplitViewBarButtonItemPresenter.h */,
 				5EC4F1FB17F16A130069C059 /* DataTableViewController.h */,
 				5EC4F1FC17F16A130069C059 /* DataTableViewController.m */,
 				5E71F51E17F40FB8007DE635 /* FlickrPlacePhotosTVC.h */,
