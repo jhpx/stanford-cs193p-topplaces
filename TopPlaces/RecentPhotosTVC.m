@@ -31,13 +31,12 @@
     [defaults synchronize];
 }
 
-// view出现前刷新
-- (void)viewWillAppear:(BOOL)animated
+// view出现后，强制停转activityIndicator，刷新splitViewDetail
+- (void)viewDidAppear:(BOOL)animated
 {
     [self.activityIndicator stopAnimating];
-	[self.tableView reloadData];
+    [self updateMapViewController:[self.splitViewController.viewControllers lastObject]]; //for ipad
 }
-
 
 #pragma mark - UITableViewDelegate
 
@@ -50,5 +49,6 @@
         self.items = items;
     }
 }
+
 
 @end

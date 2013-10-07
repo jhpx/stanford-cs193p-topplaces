@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-#import "DataRepresent.h"
 #import "SplitViewBarButtonItemPresenter.h"
 
 @class MapViewController;
@@ -19,6 +18,6 @@
 
 @interface MapViewController : UIViewController <SplitViewBarButtonItemPresenter>
 @property (nonatomic, strong) NSArray *annotations; // of id <MKAnnotation>
-@property (nonatomic, weak) id <MapViewControllerDelegate,DataRepresent> delegate;
+@property (nonatomic, weak) id <MapViewControllerDelegate> delegate;
 @property (nonatomic, strong) UIBarButtonItem *splitViewBarButtonItem;
 @end

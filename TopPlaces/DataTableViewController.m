@@ -29,8 +29,7 @@
 }
 
 // 预留一个setItemsHook函数，供子类在reloadData前对数据进行Hook处理
-// items载入完成，停转activityIndicator,刷新splitViewDetail
-
+// setItems完成后，停转activityIndicator，刷新splitViewDetail
 - (void)setItems:(NSArray *)items
 {
     if(_items!=items)
@@ -39,10 +38,9 @@
         if ([self respondsToSelector:@selector(setItemsHook:)]){
             [self performSelector:@selector(setItemsHook:) withObject:items];
         }
-                
-        [self updateMapViewController:[self.splitViewController.viewControllers lastObject]]; //for ipad
         
         [self.activityIndicator stopAnimating];
+        [self updateMapViewController:[self.splitViewController.viewControllers lastObject]]; //for ipad
         [self.tableView reloadData];
     }
 }
@@ -59,7 +57,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    if ([self respondsToSelector:@selector(setSplitViewControllerDelegate:)]) {
+    if ([self respondsToSelector:@selector(setSplitViewControllerDelegate)]) {
         [self performSelector:@selector(setSplitViewControllerDelegate)];
     }
     [self.tableView reloadData];
@@ -200,5 +198,9 @@
     [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = nil;
 }
 
+- (void) setSplitViewControllerDelegate
+{
+    self.splitViewController.delegate = self;
+}
 
 @end

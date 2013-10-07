@@ -7,8 +7,7 @@
 //
 
 #import "FlickrPlacePhotosTVC.h"
-#import "DataRepresent.h"
 
-@interface RecentPhotosTVC : FlickrPlacePhotosTVC <DataRepresent>
+@interface RecentPhotosTVC : FlickrPlacePhotosTVC
 
 @end

@@ -8,6 +8,10 @@
 
 #import "MapViewController.h"
 #import "DataUtils.h"
+#import "ItemAnnotation.h"
+#import "FlickrFetcher.h"
+#import "FlickrPlacePhotosTVC.h"
+#import "FlickrTopPlacesTVC.h"
 
 @interface MapViewController() <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -23,8 +27,31 @@
     [super setTitle:title];
     self.titleBarButtonItem.title = title;
 }
+#pragma mark - Suegue
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Map Annotation segue
+    if ([sender isKindOfClass:[ItemAnnotation class]]) {
+        // 从Photos Map进行segue，异步获取Flickr上某一photo的实际image
+        if ([segue.identifier isEqualToString:@"Show Photo"]) {
+            if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
+                NSDictionary* photo = [(ItemAnnotation*)sender item];
+                [segue.destinationViewController setTitle:[sender title]];
+                [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
+            }
+        }
+        // 从Places Map进行segue，异步获取Flickr上某一place的photos
+        else if ([segue.identifier isEqualToString:@"Map Place Photos"]) {
+            if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
+                NSDictionary *place = [(ItemAnnotation*)sender item];
+                [DataUtils updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} target:segue.destinationViewController callback:@selector(setItems:)];
+                [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
+            }
+        }
+    }
 
+}
 
 #pragma mark - Synchronize Model and View
 
@@ -75,10 +102,9 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
-    if ([self.delegate respondsToSelector:@selector(performAnnotationSegue:)]) {
-        [self.navigationController popViewControllerAnimated:NO];
-        [self.delegate performSelector:@selector(performAnnotationSegue:) withObject:view.annotation];
-       
+    if ([self.delegate respondsToSelector:@selector(annotationSegueIdentifier)]) {
+        NSString *segueIdentifier = [self.delegate performSelector:@selector(annotationSegueIdentifier)];
+        [self performSegueWithIdentifier:segueIdentifier sender:view.annotation];
     }
     else {
         NSLog(@"callout accessory tapped for annotation %@", [view.annotation title]);

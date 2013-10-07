@@ -9,6 +9,5 @@
 #import "DataTableViewController.h"
 
 @interface FlickrTopPlacesTVC : DataTableViewController
-
-- (void)performAnnotationSegue:(id)sender;
+- (NSString*)annotationSegueIdentifier;
 @end
