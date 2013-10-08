@@ -40,6 +40,17 @@
         }
         
     }
+    // Map Annotation segue
+    else if ([sender isKindOfClass:[ItemAnnotation class]]) {
+        // 从Photos Map进行segue，异步获取Flickr上某一photo的实际image
+        if ([segue.identifier isEqualToString:@"Show Photo"]) {
+            if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
+                NSDictionary* photo = [(ItemAnnotation*)sender item];
+                [segue.destinationViewController setTitle:[sender title]];
+                [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
+            }
+        }
+    }
 }
 
 - (NSString*)annotationSegueIdentifier

@@ -14,15 +14,18 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UINavigationItem *navItem;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation ImageViewController
 
--(void)setTitle:(NSString *)title
+- (void)setTitle:(NSString *)title
 {
     [super setTitle:title];
+    self.navItem.title = title;
 }
+
 
 
 // 当setImageURL时刷新图片,activityIndicator开始转动
@@ -80,20 +83,13 @@
 
 #pragma mark - SplitViewBarButtonItemPresenter
 
-- (void)handleSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
-{
-    NSMutableArray *toolbarItems = [self.navigationItem.leftBarButtonItems
- mutableCopy];
-    if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
-    if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
-    self.navigationItem.leftBarButtonItems = toolbarItems;
-    _splitViewBarButtonItem = splitViewBarButtonItem;
-}
-
 - (void)setSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {
-    if (splitViewBarButtonItem != _splitViewBarButtonItem) {
-        [self handleSplitViewBarButtonItem:splitViewBarButtonItem];
-    }
+    self.navItem.leftBarButtonItem = splitViewBarButtonItem;
+}
+
+- (UIBarButtonItem *)splitViewBarButtonItem
+{
+    return self.navItem.leftBarButtonItem;
 }
 @end

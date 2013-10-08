@@ -169,10 +169,12 @@
 - (id <SplitViewBarButtonItemPresenter>)splitViewBarButtonItemPresenter
 {
     id detailVC = [self.splitViewController.viewControllers lastObject];
-    if (![detailVC conformsToProtocol:@protocol(SplitViewBarButtonItemPresenter)]) {
-        detailVC = nil;
+    if ([detailVC conformsToProtocol:@protocol(SplitViewBarButtonItemPresenter)]) {
+        return detailVC;
     }
-    return detailVC;
+    else {
+        return nil;
+    }
 }
 
 - (BOOL)splitViewController:(UISplitViewController *)svc
@@ -187,7 +189,7 @@
           withBarButtonItem:(UIBarButtonItem *)barButtonItem
        forPopoverController:(UIPopoverController *)pc
 {
-    barButtonItem.title = self.title;
+    barButtonItem.title = self.navigationItem.title;
     [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = barButtonItem;
 }
 
@@ -200,7 +202,7 @@
 
 - (void) setSplitViewControllerDelegate
 {
-    self.splitViewController.delegate = self;
+    if(!self.splitViewController.delegate)self.splitViewController.delegate = self;
 }
 
 @end

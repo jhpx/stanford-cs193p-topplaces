@@ -66,12 +66,24 @@
         }
         
     }
+    // Map Annotation segue
+    else if ([sender isKindOfClass:[ItemAnnotation class]]) {
+        // 从Places Map进行segue，异步获取Flickr上某一place的photos
+        if ([segue.identifier isEqualToString:@"List Place Photos"]) {
+            if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
+                NSDictionary *place = [(ItemAnnotation*)sender item];
+                [DataUtils updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} target:segue.destinationViewController callback:@selector(setItems:)];
+                [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
+            }
+        }
+    }
+
 }
 
 
 - (NSString*)annotationSegueIdentifier
 {
-    return @"Map Place Photos";
+    return @"List Place Photos";
 }
 
 #pragma mark - UITableViewDataSource
