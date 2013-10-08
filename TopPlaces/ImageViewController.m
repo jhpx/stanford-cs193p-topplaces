@@ -12,8 +12,6 @@
 @interface ImageViewController ()<UIScrollViewDelegate>
 
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *titleBarButtonItem;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -24,7 +22,6 @@
 -(void)setTitle:(NSString *)title
 {
     [super setTitle:title];
-    self.titleBarButtonItem.title = title;
 }
 
 
@@ -85,10 +82,11 @@
 
 - (void)handleSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {
-    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    NSMutableArray *toolbarItems = [self.navigationItem.leftBarButtonItems
+ mutableCopy];
     if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
     if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
-    self.toolbar.items = toolbarItems;
+    self.navigationItem.leftBarButtonItems = toolbarItems;
     _splitViewBarButtonItem = splitViewBarButtonItem;
 }
 

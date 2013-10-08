@@ -15,18 +15,11 @@
 
 @interface MapViewController() <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *titleBarButtonItem;
 
 @end
 
 @implementation MapViewController
 
--(void)setTitle:(NSString *)title
-{
-    [super setTitle:title];
-    self.titleBarButtonItem.title = title;
-}
 #pragma mark - Suegue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -130,10 +123,10 @@
 
 - (void)handleSplitViewBarButtonItem:(UIBarButtonItem *)splitViewBarButtonItem
 {
-    NSMutableArray *toolbarItems = [self.toolbar.items mutableCopy];
+    NSMutableArray *toolbarItems = [self.navigationItem.leftBarButtonItems mutableCopy];
     if (_splitViewBarButtonItem) [toolbarItems removeObject:_splitViewBarButtonItem];
     if (splitViewBarButtonItem) [toolbarItems insertObject:splitViewBarButtonItem atIndex:0];
-    self.toolbar.items = toolbarItems;
+    self.navigationItem.leftBarButtonItems = toolbarItems;
     _splitViewBarButtonItem = splitViewBarButtonItem;
 }
 
