@@ -15,5 +15,5 @@
 @interface DataTableViewController : UITableViewController <DataRepresent>
 @property (nonatomic, strong) NSArray *items;
 @property (nonatomic) UIActivityIndicatorView * activityIndicator;
-- (void)updateMapViewController:(UIViewController*)controller;
+- (void)updateDestinationViewController:(UIViewController*)controller;
 @end

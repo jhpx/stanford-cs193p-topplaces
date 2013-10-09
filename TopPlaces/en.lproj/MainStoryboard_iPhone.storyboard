@@ -302,7 +302,7 @@
                     <navigationItem key="navigationItem" title="Photos" id="mXC-Jz-HN4"/>
                     <connections>
                         <outlet property="mapView" destination="aZP-VH-sLA" id="8Yo-PG-NAe"/>
-                        <segue destination="N11-5a-Lqn" kind="push" identifier="Map Place Photos" id="QiV-v4-cfA"/>
+                        <segue destination="N11-5a-Lqn" kind="push" identifier="List Place Photos" id="QiV-v4-cfA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Tv-fF-v1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -325,9 +325,15 @@
             <relationships>
                 <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="navItem" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="titleBarButtonItem" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+                <relationship kind="outlet" name="navItem" candidateClass="UINavigationItem"/>
             </relationships>
         </class>
         <class className="RecentPhotosTVC" superclassName="FlickrPlacePhotosTVC">
@@ -340,8 +346,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="IbB-Yo-h8h"/>
         <segue reference="QiV-v4-cfA"/>
+        <segue reference="IbB-Yo-h8h"/>
         <segue reference="ubS-RF-JDx"/>
     </inferredMetricsTieBreakers>
 </document>

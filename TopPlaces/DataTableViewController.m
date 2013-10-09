@@ -32,17 +32,18 @@
 // setItems完成后，停转activityIndicator，刷新splitViewDetail
 - (void)setItems:(NSArray *)items
 {
-    if(_items!=items)
-    {
+//    if(_items!=items)
+//    {
         _items = items;
         if ([self respondsToSelector:@selector(setItemsHook:)]){
             [self performSelector:@selector(setItemsHook:) withObject:items];
         }
         
         [self.activityIndicator stopAnimating];
-        [self updateMapViewController:[self.splitViewController.viewControllers lastObject]]; //for ipad
+        
+        [self updateDestinationViewController:[self.splitViewController.viewControllers lastObject]]; //for ipad
         [self.tableView reloadData];
-    }
+//    }
 }
 
 #pragma mark - View Controller Lifecycle
@@ -57,9 +58,6 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    if ([self respondsToSelector:@selector(setSplitViewControllerDelegate)]) {
-        [self performSelector:@selector(setSplitViewControllerDelegate)];
-    }
     [self.tableView reloadData];
 }
 
@@ -149,7 +147,7 @@
     return annotations;
 }
 
-- (void)updateMapViewController:(UIViewController*)controller
+- (void)updateDestinationViewController:(UIViewController*)controller
 {
     if ([controller isKindOfClass:[MapViewController class]]) {
         MapViewController *mapVC = (MapViewController *)controller;
@@ -161,6 +159,7 @@
         else {
             mapVC.title = @"Map";
         }
+        mapVC.splitViewController.delegate = self;
     }
 }
 
@@ -200,9 +199,9 @@
     [self splitViewBarButtonItemPresenter].splitViewBarButtonItem = nil;
 }
 
-- (void) setSplitViewControllerDelegate
-{
-    if(!self.splitViewController.delegate)self.splitViewController.delegate = self;
-}
+//- (void) setSplitViewControllerDelegate
+//{
+//    if(!self.splitViewController.delegate)self.splitViewController.delegate = self;
+//}
 
 @end

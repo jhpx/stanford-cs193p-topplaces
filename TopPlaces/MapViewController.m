@@ -24,29 +24,29 @@
 
 #pragma mark - Suegue
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-//{
-//    // Map Annotation segue
-//    if ([sender isKindOfClass:[ItemAnnotation class]]) {
-//        // 从Photos Map进行segue，异步获取Flickr上某一photo的实际image
-//        if ([segue.identifier isEqualToString:@"Show Photo"]) {
-//            if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
-//                NSDictionary* photo = [(ItemAnnotation*)sender item];
-//                [segue.destinationViewController setTitle:[sender title]];
-//                [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
-//            }
-//        }
-//        // 从Places Map进行segue，异步获取Flickr上某一place的photos
-//        else if ([segue.identifier isEqualToString:@"Map Place Photos"]) {
-//            if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
-//                NSDictionary *place = [(ItemAnnotation*)sender item];
-//                [DataUtils updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} target:segue.destinationViewController callback:@selector(setItems:)];
-//                [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
-//            }
-//        }
-//    }
-//
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Map Annotation segue
+    if ([sender isKindOfClass:[ItemAnnotation class]]) {
+        // 从Photos Map进行segue，异步获取Flickr上某一photo的实际image
+        if ([segue.identifier isEqualToString:@"Show Photo"]) {
+            if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
+                NSDictionary* photo = [(ItemAnnotation*)sender item];
+                [segue.destinationViewController setTitle:[sender title]];
+                [DataUtils updateByMethod:^{return [FlickrFetcher urlForPhoto:photo format:FlickrPhotoFormatLarge];} target:segue.destinationViewController callback:@selector(setImageURL:)];
+            }
+        }
+        // 从Places Map进行segue，异步获取Flickr上某一place的photos
+        else if ([segue.identifier isEqualToString:@"List Place Photos"]) {
+            if ([segue.destinationViewController respondsToSelector:@selector(setItems:)]) {
+                NSDictionary *place = [(ItemAnnotation*)sender item];
+                [DataUtils updateByMethod:^(){return [FlickrFetcher photosInPlace:place maxResults:50];} target:segue.destinationViewController callback:@selector(setItems:)];
+                [segue.destinationViewController setTitle:place[FLICKR_PLACE_WOE]];
+            }
+        }
+    }
+    
+}
 
 #pragma mark - Synchronize Model and View
 
@@ -101,12 +101,18 @@
     [DataUtils updateByMethod:^(){return [self.delegate mapViewController:self imageForAnnotation:aView.annotation];} target:(UIImageView *)aView.leftCalloutAccessoryView callback:@selector(setImage:)];
 }
 
-//使用delegate进行跳转
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     if ([self.delegate respondsToSelector:@selector(annotationSegueIdentifier)]) {
         NSString *segueIdentifier = [self.delegate performSelector:@selector(annotationSegueIdentifier)];
+        //        //iPad使用delegate进行segue跳转
+        //        if (![UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         [(UIViewController*)self.delegate performSegueWithIdentifier:segueIdentifier sender:view.annotation];
+        //        }
+        //        //iphone使用self进行segue跳转
+        //        else {
+        //            [self performSegueWithIdentifier:segueIdentifier sender:view.annotation];
+        //        }
     }
     else {
         NSLog(@"callout accessory tapped for annotation %@", [view.annotation title]);
@@ -119,7 +125,6 @@
 {
     [super viewDidLoad];
     self.mapView.delegate = self;
-//    [self handleSplitViewBarButtonItem:self.splitViewBarButtonItem];
 }
 
 - (void)viewDidUnload

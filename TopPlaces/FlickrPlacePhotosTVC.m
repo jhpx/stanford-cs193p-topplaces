@@ -36,7 +36,7 @@
     // iphone右上按钮segue，跳转至map画面
     else if ([sender isKindOfClass:[UIBarButtonItem class]]) {
         if ([segue.identifier isEqualToString:@"Show Map"]) {
-            [self updateMapViewController:segue.destinationViewController];
+            [self updateDestinationViewController:segue.destinationViewController];
         }
         
     }

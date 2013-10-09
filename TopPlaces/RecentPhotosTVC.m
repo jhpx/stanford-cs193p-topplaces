@@ -35,7 +35,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [self.activityIndicator stopAnimating];
-    [self updateMapViewController:[self.splitViewController.viewControllers lastObject]]; //for ipad
+    [self updateDestinationViewController:[self.splitViewController.viewControllers lastObject]]; //for ipad
 }
 
 #pragma mark - UITableViewDelegate
